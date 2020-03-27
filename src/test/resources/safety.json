@@ -1,0 +1,26 @@
+{
+    "persons": [
+        { "firstName":"Toto1", "lastName":"Toto1 name", "address":"adress1", "city":"city1", "zip":"Toto1 zip", "phone":"Toto1 phone", "email":"Toto1@email.com" },
+        { "firstName":"Toto2", "lastName":"Toto2 name", "address":"adress1", "city":"city1", "zip":"Toto2 zip", "phone":"Toto2 phone", "email":"Toto2@email.com" },
+		{ "firstName":"Toto3", "lastName":"Toto3 name", "address":"adress2", "city":"city2", "zip":"Toto3 zip", "phone":"Toto3 phone", "email":"Toto3@email.com" },
+		{ "firstName":"Toto4", "lastName":"Toto4 name", "address":"adress3", "city":"city3", "zip":"Toto4 zip", "phone":"Toto4 phone", "email":"Toto4@email.com" },
+		{ "firstName":"Toto5", "lastName":"Toto5 name", "address":"adress4", "city":"city4", "zip":"Toto5 zip", "phone":"Toto5 phone", "email":"Toto5@email.com" },
+		{ "firstName":"Toto6", "lastName":"Toto6 name", "address":"adress5", "city":"city5", "zip":"Toto6 zip", "phone":"Toto6 phone", "email":"Toto6@email.com" }
+	], 
+    "firestations": [
+		{ "address":"adress1", "station":"3" },
+        { "address":"adress2", "station":"3" },
+		{ "address":"adress3", "station":"5" },
+		{ "address":"adress4", "station":"6" },
+		{ "address":"adress4", "station":"6" }
+		
+	],
+    "medicalrecords": [
+        { "firstName":"Toto1", "lastName":"Toto1 name", "birthdate":"03/06/1984", "medications":["aznol:350mg", "hydrapermazol:100mg"], "allergies":["nillacilan"] },
+        { "firstName":"Toto2", "lastName":"Toto2 name", "birthdate":"03/06/1989", "medications":["pharmacol:5000mg", "terazine:10mg", "noznazol:250mg"], "allergies":[] },
+        { "firstName":"Toto3", "lastName":"Toto3 name", "birthdate":"02/18/2012", "medications":[], "allergies":["peanut"] },
+        { "firstName":"Toto4", "lastName":"Toto4 name", "birthdate":"09/06/2017", "medications":[], "allergies":[] },
+		{ "firstName":"Toto5", "lastName":"Toto5 name", "birthdate":"03/06/1987", "medications":["aznol:350mg", "hydrapermazol:100mg"], "allergies":["nillacilan"] },
+        { "firstName":"Toto6", "lastName":"Toto6 name", "birthdate":"10/07/1989", "medications":["pharmacol:5000mg", "terazine:10mg", "noznazol:250mg"], "allergies":[] }
+        ] 
+}

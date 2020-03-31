@@ -9,14 +9,12 @@ import com.safetynet.alerts.services.LoadPersonServiceImpl;
 
 @SpringBootApplication
 public class AlertsApplication {
-	
+
 	public static void main(String[] args) throws JsonMappingException, IOException {
 
 		SpringApplication.run(AlertsApplication.class, args);
 
 		System.out.println("Alerts");
-		
-	
+
 	}
 }
-	

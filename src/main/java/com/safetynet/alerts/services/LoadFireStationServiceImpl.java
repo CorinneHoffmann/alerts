@@ -19,18 +19,19 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.safetynet.alerts.dao.PersonDao;
-import com.safetynet.alerts.model.Person;
+import com.safetynet.alerts.dao.FireStationDao;
+import com.safetynet.alerts.model.FireStation;
 
-@Service("loadPersonService")
-public class LoadPersonServiceImpl implements LoadPersonService {
+@Service("loadFireStationService")
+public class LoadFireStationServiceImpl implements LoadFireStationService {
 
-	@Autowired
-	PersonDao personDao;
-
-	List<Person> listPerson = new ArrayList<Person>();
 	
-	Logger logger = LoggerFactory.getLogger(LoadPersonServiceImpl.class);
+	@Autowired
+	FireStationDao fireStationDao;
+
+	List<FireStation> listFireStation = new ArrayList<FireStation>();
+	
+	Logger logger = LoggerFactory.getLogger(LoadFireStationServiceImpl.class);
 	
 	@Value("${filename}")
 	private String filename;
@@ -47,25 +48,25 @@ public class LoadPersonServiceImpl implements LoadPersonService {
 			logger.error("FILE_NOT_FOUND" +filename);
 		}
 
-		// Positionnement sur le JSON persons et set de la liste vers PersonDao
-		String jsonPerson = new String();
+		// Positionnement sur le JSON fireStation et set de la liste vers FireStationDao
+		String jsonFireStation = new String();
 		Scanner scanner = new Scanner(fs);
 
 		try {
 
 			do {
-				jsonPerson = scanner.nextLine();
-			} while ((jsonPerson.contains("persons") == false));
+				jsonFireStation = scanner.nextLine();
+			} while ((jsonFireStation.contains("firestations") == false));
 
 			while (scanner.hasNext()) {
-				jsonPerson = scanner.nextLine();
+				jsonFireStation = scanner.nextLine();
 				ObjectMapper objetctMapper = new ObjectMapper();
-				Person person = objetctMapper.readValue(jsonPerson, Person.class);
-				listPerson.add(person);
+				FireStation fireStation = objetctMapper.readValue(jsonFireStation, FireStation.class);
+				listFireStation.add(fireStation);
 
 			}
 		} catch (JsonParseException e) {
-			logger.info("END OF LOAD PERSON");
+			logger.info("END OF LOAD FIRESTATION");
 		} finally {
 			scanner.close();
 		}
@@ -76,13 +77,12 @@ public class LoadPersonServiceImpl implements LoadPersonService {
 			logger.error("PROBLEM TO CLOSE FILE" +filename);
 		}
 		// set DAO
-		personDao.SetAllPerson(listPerson);
-		listPerson = personDao.getAllPerson();
+		fireStationDao.SetAllFireStation(listFireStation);
+		listFireStation = fireStationDao.getAllFireStation();
 		int index;
-		for (index=0;index<listPerson.size();index++)
-		{System.out.println("Person : " +listPerson.get(index).getFirstName());
+		for (index=0;index<listFireStation.size();index++)
+		{System.out.println("FireStation : " +listFireStation.get(index).getAddress() +listFireStation.get(index).getStation());
 		}
 
 	}
-
 }

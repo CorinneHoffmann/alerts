@@ -34,19 +34,19 @@ class PersonServiceTest {
 	PersonService personService;
 
 	@Autowired
-	LoadPersonService loadpersonService;
+	LoadPersonService loadPersonService;
 
 	@BeforeEach
 	private void setUpPerTest() throws JsonMappingException, ClassNotFoundException, IOException, SQLException {
 		personDao.deleteAllPerson();
-		loadpersonService.loadData();
+		loadPersonService.loadData();
 		listPerson = personDao.getAllPerson();
 	}
 
 	@Test
 	void createPersonServiceTest() {
 
-		person.setAllAttributes("Totocreate", "Toto3create name", "Totocreate adress", "Totocreate city",
+		person.setAllAttributes("Totocreate", "Toto3create name", "Totocreate address", "Totocreate city",
 				"Totocreate zip", "Totocreate phone", "Totocreate email");
 		personService.createPerson(person);
 		assertEquals("Totocreate", listPerson.get(6).getFirstName());
@@ -57,16 +57,16 @@ class PersonServiceTest {
 	void updatePersonServiceTest() throws DaoException {
 
 		person = personDao.getPerson("Toto1", "Toto1 name");
-		person.setAddress("updateadresse1");
+		person.setAddress("updateaddresse1");
 		person.setEmail("updateToto1@email.com");
-		person = personService.updatePerson(person);
-		assertEquals("updateadresse1", person.getAddress());
-		assertEquals("updateToto1@email.com", person.getEmail());
+		personService.updatePerson(person);
+		assertEquals("updateaddresse1", listPerson.get(0).getAddress());
+		assertEquals("updateToto1@email.com", listPerson.get(0).getEmail());
 	}
 
 	@Test
 	void deletePersonServiceTest() throws DaoException {
-		personDao.deletePerson(listPerson.get(0));
+		personService.deletePerson("Toto1","Toto1 name");
 		assertEquals(5, listPerson.size());
 		assertEquals("Toto2", listPerson.get(0).getFirstName());
 	}

@@ -1,22 +1,20 @@
 package com.safetynet.alerts.exception;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import com.safetynet.alerts.controller.PersonController;
 import com.safetynet.alerts.model.ApiResponse;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
 
 @RestControllerAdvice
 public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
-	Logger logger = LoggerFactory.getLogger(PersonController.class);
+	Logger logger = LoggerFactory.getLogger(CustomResponseEntityExceptionHandler.class);
 
 	@ExceptionHandler(DaoException.class)
 	@ResponseBody
@@ -27,6 +25,14 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
 		return apiresponse;
 	}
 
+	@ExceptionHandler(ControllerPersonException.class)
+	@ResponseBody
+	@ResponseStatus(HttpStatus.NOT_MODIFIED)
+	public ApiResponse handleNotFoundException(ControllerPersonException e) {
+		logger.error("PARAMETRE NOT INFORMED");
+		ApiResponse apiresponse = new ApiResponse(HttpStatus.NOT_MODIFIED , e.getMessage());
+		return apiresponse;
+	}
 	
 	@ExceptionHandler(RuntimeException.class)
 	@ResponseBody

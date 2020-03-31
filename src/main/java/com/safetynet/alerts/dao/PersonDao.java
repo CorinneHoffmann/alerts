@@ -14,7 +14,7 @@ public interface PersonDao {
 			
 	public void createPerson(Person person);
 	
-	public void updatePerson(Person person) throws DaoException;
+	public Person updatePerson(Person person) throws DaoException;
 
 	public void deletePerson(Person person) throws DaoException;
 	

@@ -15,34 +15,41 @@ import com.safetynet.alerts.model.Person;
 @Service("personService")
 public class PersonServiceImpl implements PersonService {
 
+	
+	@Autowired
+	Person person;
+	
 	@Autowired
 	PersonDao personDao;
 
-	Person person;
-	List<Person> listPerson = new ArrayList<Person>();
-
-	Logger logger = LoggerFactory.getLogger(LoadPersonServiceImpl.class);
+	//Person person;
+	List<Person >listPerson;
+	
+	//Logger logger = LoggerFactory.getLogger(LoadPersonServiceImpl.class);
 
 	@Override
 	public void createPerson(Person person) {
 		this.person = person;
-		logger.info("CREATE_PERSON");
-		personDao.createPerson(person);
+		
+		//logger.info("CREATE_PERSON PersonService");
+		personDao.createPerson(person);	
+		//listPerson = personDao.createPerson(person);	
+		//return listPerson;
 	}
 
 	@Override
-	public void updatePerson(Person person) throws DaoException {
-
+	public Person updatePerson(Person person) throws DaoException {
+		//Person personUpdated;
 		this.person = person;
-		logger.info("UPDATE_PERSON");
-		personDao.updatePerson(person);
-
+		//logger.info("UPDATE_PERSON PersonService");
+		person = personDao.updatePerson(person);
+		return person;
 	}
 
 	@Override
 	public void deletePerson(Person person) throws DaoException {
 		this.person = person;
-		logger.info("DELETE_PERSON");
+		//logger.info("DELETE_PERSON PersonService");
 		personDao.deletePerson(person);
 	}
 }

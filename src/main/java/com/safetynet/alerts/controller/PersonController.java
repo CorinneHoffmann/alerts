@@ -35,33 +35,39 @@ public class PersonController {
 	@Autowired
 	PersonService personService;
 
-	//@GetMapping(value = "/person")
+	// @GetMapping(value = "/person")
 	@GetMapping
 	List<Person> list() {
 		return personDao.getAllPerson();
 	}
 
-	//@PostMapping(value = "/person", consumes = MediaType.APPLICATION_JSON_VALUE)
+	// @PostMapping(value = "/person", consumes = MediaType.APPLICATION_JSON_VALUE)
 	@PostMapping
-	public void createPerson(@RequestBody Person person) {
+	public Person createPerson(@RequestBody Person person) {
 		logger.info("CREATE_PERSON " + person.getFirstName() + " " + person.getLastName());
-		personService.createPerson(person);
+		return personService.createPerson(person);
 	}
-	
-	
-	//@PutMapping(value = "/person", consumes = MediaType.APPLICATION_JSON_VALUE)
+
+	// @PutMapping(value = "/person", consumes = MediaType.APPLICATION_JSON_VALUE)
 	@PutMapping
-	public void updatePerson(@RequestBody Person person) throws DaoException {
+	public Person updatePerson(@RequestBody Person person) throws DaoException {
 		logger.info("UPDATE_PERSON " + person.getFirstName() + " " + person.getLastName());
-		personService.updatePerson(person);
+		return personService.updatePerson(person);
 	}
-	
+
 	@DeleteMapping
-	public void deletePerson(@RequestParam (required = true) String firstName,  @RequestParam (required = true) String lastName) throws DaoException, ControllerPersonException {
-		
+	public Person deletePerson(@RequestParam(value = "firstName", required = false) String firstName,
+			@RequestParam(value = "lastName", required = false) String lastName)
+			throws DaoException, ControllerPersonException {
+
+		if (firstName.isEmpty()) {
+			throw new ControllerPersonException("Vous devez saisir les paramètres firstName and lastName ");
+		}
+		if (lastName.isEmpty()) {
+			throw new ControllerPersonException("Vous devez saisir les paramètres firstName and lastName ");
+		}
 		logger.info("QUERY_DELETE_PERSON " + firstName + " " + lastName);
-		personService.deletePerson(firstName,lastName);		
+		return personService.deletePerson(firstName, lastName);
+
 	}
 }
-		
-	

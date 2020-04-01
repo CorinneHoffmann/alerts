@@ -8,11 +8,11 @@ import com.safetynet.alerts.model.FireStation;
 
 public interface FireStationService {
 
-	public void createFireStation(FireStation fireStation);
+	public FireStation createFireStation(FireStation fireStation);
 
-	public void updateFireStation(FireStation fireStation) throws DaoException;
+	public FireStation updateFireStation(FireStation fireStation) throws DaoException;
 
-	public void deleteFireStationByAddress(String address) throws DaoException;
+	public FireStation deleteFireStationByAddress(String address) throws DaoException;
 
 	public List<FireStation> deleteFireStationByStation(int station) throws DaoException;
 

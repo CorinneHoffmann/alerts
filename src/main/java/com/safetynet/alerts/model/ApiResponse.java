@@ -19,13 +19,6 @@ public class ApiResponse {
 		this.httpStatus = httpStatus;
 	}
 
-	public ApiResponse(HttpStatus httpStatus, String message, List<String> errors) {
-		super();
-		this.httpStatus = httpStatus;
-		this.message = message;
-		this.errors = errors;
-	}
-
 	public HttpStatus getHttpStatus() {
 		return httpStatus;
 	}

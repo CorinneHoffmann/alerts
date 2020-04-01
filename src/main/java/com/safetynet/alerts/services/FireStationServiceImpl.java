@@ -24,16 +24,17 @@ public class FireStationServiceImpl implements FireStationService {
 	private String address;
 	
 	@Override
-	public void createFireStation(FireStation fireStation) {
+	public FireStation createFireStation(FireStation fireStation) {
 		this.fireStation = fireStation;
 		fireStationDao.createFireStation(fireStation);		
+		return fireStation;
 	}
 
 	@Override
-	public void updateFireStation(FireStation fireStation) throws DaoException {
+	public FireStation updateFireStation(FireStation fireStation) throws DaoException {
 		this.fireStation = fireStation;
 		fireStationDao.updateFireStation(fireStation);	
-		
+		return fireStation;	
 	}
 
 	@Override
@@ -44,10 +45,10 @@ public class FireStationServiceImpl implements FireStationService {
 	}
 	
 	@Override
-	public void deleteFireStationByAddress(String address) throws DaoException {
+	public FireStation deleteFireStationByAddress(String address) throws DaoException {
 		this.address = address;
-		fireStationDao.deleteFireStationByAddress(address);	
-		
+		FireStation fireStation = fireStationDao.deleteFireStationByAddress(address);	
+		return fireStation;
 	}
 
 }

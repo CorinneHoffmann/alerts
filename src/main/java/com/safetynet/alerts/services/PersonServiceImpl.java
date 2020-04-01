@@ -20,21 +20,24 @@ public class PersonServiceImpl implements PersonService {
 	private String lastName;
 
 	@Override
-	public void createPerson(Person person) {
+	public Person createPerson(Person person) {
 		this.person = person;
 		personDao.createPerson(person);
+		return person;
 	}
 
 	@Override
-	public void updatePerson(Person person) throws DaoException {
+	public Person updatePerson(Person person) throws DaoException {
 		this.person = person;
 		personDao.updatePerson(person);
+		return person;
 	}
 	
 	@Override
-	public void deletePerson(String firstName,String lastName) throws DaoException {
+	public Person deletePerson(String firstName,String lastName) throws DaoException {
 		this.firstName = firstName;
 		this.lastName = lastName;
-		personDao.deletePerson(firstName,lastName);
+		person = personDao.deletePerson(firstName,lastName);
+		return person;
 	}
 }

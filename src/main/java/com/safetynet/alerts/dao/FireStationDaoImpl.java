@@ -38,14 +38,15 @@ public class FireStationDaoImpl implements FireStationDao {
 	}
 
 	@Override
-	public void createFireStation(FireStation fireStation) {
+	public FireStation createFireStation(FireStation fireStation) {
 		this.fireStation = fireStation;
 		listFireStation.add(fireStation);
 		logger.info("FIRESTATION CREATED " + fireStation.getAddress() + " " + fireStation.getStation());
+		return fireStation;
 	}
 
 	@Override
-	public void updateFireStation(FireStation fireStation) throws DaoException {
+	public FireStation updateFireStation(FireStation fireStation) throws DaoException {
 		this.fireStation = fireStation;
 		int index;
 		boolean updateOK = false;
@@ -60,24 +61,28 @@ public class FireStationDaoImpl implements FireStationDao {
 			logger.error("FIRESTATION NOT FOUND FOR UPDATE " + fireStation.getAddress());
 			throw new DaoException("La station que vous voulez modifier n\'est pas dans la liste");
 		}
+		return fireStation;
 	}
 
 	@Override
-	public void deleteFireStationByAddress(String address) throws DaoException {
+	public FireStation deleteFireStationByAddress(String address) throws DaoException {
 		this.address = address;
 		int index;
 		boolean updateOK = false;
 		for (index = 0; index < listFireStation.size(); index++) {
 			if (listFireStation.get(index).getAddress().contentEquals(address) == true) {
+				fireStation = listFireStation.get(index);
 				listFireStation.remove(index);
-				logger.info("FIRESTATION DELETED " + fireStation.getAddress() + " " + fireStation.getStation());
+				logger.info("FIRESTATION DELETED " + address);
+				index--;
 				updateOK = true;
 			}
 		}
 		if (updateOK == false) {
-			logger.error("FIRESTATION NOT FOUND FOR DELETE " + fireStation.getAddress());
-			throw new DaoException("L/'adresse de la fireStation que vous voulez supprimer n\'est pas dans la liste");
+			logger.error("FIRESTATION NOT FOUND FOR DELETE " + address);
+			throw new DaoException("L\'adresse de la fireStation que vous voulez supprimer n\'est pas dans la liste");
 		}
+		return fireStation;
 	}
 
 	@Override
@@ -95,10 +100,10 @@ public class FireStationDaoImpl implements FireStationDao {
 			}
 		}
 		if (updateOK == true) {
-			logger.info("FIRESTATION DELETED station " + fireStation.getStation());
+			logger.info("FIRESTATION DELETED station " + station);
 		}
 		if (updateOK == false) {
-			logger.error("FIRESTATION NOT FOUND FOR DELETE " + fireStation.getStation());
+			logger.error("FIRESTATION NOT FOUND FOR DELETE " + station);
 			throw new DaoException("L\'id de la fireStation que vous voulez supprimer n\'est pas dans la liste");
 		}
 		for (index = 0; index < result.size(); index++) {

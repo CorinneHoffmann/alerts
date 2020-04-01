@@ -5,10 +5,10 @@ import com.safetynet.alerts.model.Person;
 
 public interface PersonService {
 
-	public void createPerson(Person person);
+	public Person createPerson(Person person);
 
-	public void updatePerson(Person person) throws DaoException;
+	public Person updatePerson(Person person) throws DaoException;
 	
-	public void deletePerson(String firstName,String lastName) throws DaoException;
+	public Person deletePerson(String firstName,String lastName) throws DaoException;
 
 }

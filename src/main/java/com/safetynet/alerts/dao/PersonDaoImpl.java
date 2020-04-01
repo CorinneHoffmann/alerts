@@ -33,14 +33,15 @@ public class PersonDaoImpl implements PersonDao {
 	}
 
 	@Override
-	public void createPerson(Person person) {
+	public Person createPerson(Person person) {
 		this.person = person;
 		logger.info("PERSON CREATED " + person.getFirstName() + " " + person.getLastName());
 		listPerson.add(person);
+		return person;
 	}
 
 	@Override
-	public void updatePerson(Person person) throws DaoException {
+	public Person updatePerson(Person person) throws DaoException {
 		this.person = person;
 		int index;
 		boolean updateOK = false;
@@ -51,15 +52,14 @@ public class PersonDaoImpl implements PersonDao {
 				listPerson.set(index, person);
 				updateOK = true;
 				person = listPerson.get(index);
-				logger.info("PERSON UPDATED " + person.getFirstName() + " " + person.getLastName());
 			}
 		}
-
 		if (updateOK == false) {
 			logger.error("PERSON NOT FOUND FOR UPDATE " + person.getFirstName() + " " + person.getLastName());
 			throw new DaoException("La person que vous voulez modifier n\'est pas dans la liste");
-
 		}
+		logger.info("PERSON UPDATED " + person.getFirstName() + " " + person.getLastName());
+		return person;
 	}
 
 	@Override
@@ -93,7 +93,7 @@ public class PersonDaoImpl implements PersonDao {
 	}
 
 	@Override
-	public void deletePerson(String firstName, String lastName) throws DaoException {
+	public Person deletePerson(String firstName, String lastName) throws DaoException {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		int index;
@@ -102,10 +102,10 @@ public class PersonDaoImpl implements PersonDao {
 		for (index = 0; index < listPerson.size(); index++) {
 			if ((listPerson.get(index).getFirstName().contentEquals(firstName) == true)
 					&& (listPerson.get(index).getLastName().contentEquals(lastName) == true)) {
+				person = listPerson.get(index);
 				listPerson.remove(index);
 				findOK = true;
 				index--;
-				logger.info("PERSON DELETED " + firstName + " " +lastName);
 			}
 		}
 
@@ -113,6 +113,8 @@ public class PersonDaoImpl implements PersonDao {
 			logger.error("PERSON NOT FOUND FOR DELETE " + firstName + " " + lastName);
 			throw new DaoException("La person que vous voulez supprimer n\'est pas dans la liste");
 		}
+		logger.info("PERSON DELETED " + firstName + " " +lastName);
+		return person;
 	}
 
 }

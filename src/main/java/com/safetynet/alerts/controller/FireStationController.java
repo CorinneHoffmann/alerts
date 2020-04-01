@@ -41,25 +41,25 @@ public class FireStationController {
 	}
 
 	@PostMapping
-	public void createFireStation(@RequestBody FireStation fireStation) {
+	public FireStation createFireStation(@RequestBody FireStation fireStation) {
 		logger.info("CREATE_FIRESTATION " + fireStation.getAddress() + " " + fireStation.getStation());
-		fireStationService.createFireStation(fireStation);
+		return fireStationService.createFireStation(fireStation);
 	}
 
 	@PutMapping
-	public void updatePerson(@RequestBody FireStation fireStation) throws DaoException {
+	public FireStation updateFireStation(@RequestBody FireStation fireStation) throws DaoException {
 		logger.info("UPDATE_FIRESTATION " + fireStation.getAddress() + " " + fireStation.getStation());
-		fireStationService.updateFireStation(fireStation);
+		return fireStationService.updateFireStation(fireStation);
 	}
 
 	@DeleteMapping(value = "/address")
-	public void deleteFireStationByAddress(@RequestParam String address) throws DaoException {
+	public FireStation deleteFireStationByAddress(@RequestParam(value = "address", required = true) String address) throws DaoException {
 		logger.info("DELETE_FIRESTATION " + address);
-		fireStationService.deleteFireStationByAddress(address);
+		return fireStationService.deleteFireStationByAddress(address);
 	}
 
 	@DeleteMapping(value = "/station")
-	public List<FireStation> deleteFireStationByStation(@RequestParam int station) throws DaoException {
+	public List<FireStation> deleteFireStationByStation(@RequestParam(value = "station", required = true) int station) throws DaoException {
 		logger.info("DELETE_FIRESTATION " + station);
 		return fireStationService.deleteFireStationByStation(station);
 	}

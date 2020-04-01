@@ -8,7 +8,7 @@ import com.safetynet.alerts.services.LoadPersonService;
 import com.safetynet.alerts.services.LoadPersonServiceImpl;
 
 @SpringBootApplication
-public class AlertsApplication {
+	public class AlertsApplication {
 
 	public static void main(String[] args) throws JsonMappingException, IOException {
 

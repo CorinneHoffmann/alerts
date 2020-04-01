@@ -27,10 +27,10 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
 
 	@ExceptionHandler(ControllerPersonException.class)
 	@ResponseBody
-	@ResponseStatus(HttpStatus.NOT_MODIFIED)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public ApiResponse handleNotFoundException(ControllerPersonException e) {
 		logger.error("PARAMETRE NOT INFORMED");
-		ApiResponse apiresponse = new ApiResponse(HttpStatus.NOT_MODIFIED , e.getMessage());
+		ApiResponse apiresponse = new ApiResponse(HttpStatus.BAD_REQUEST , e.getMessage());
 		return apiresponse;
 	}
 	

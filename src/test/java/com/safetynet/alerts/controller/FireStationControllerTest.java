@@ -24,6 +24,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.safetynet.alerts.dao.FireStationDao;
+import com.safetynet.alerts.exception.ControllerException;
 import com.safetynet.alerts.exception.DaoException;
 import com.safetynet.alerts.model.FireStation;
 import com.safetynet.alerts.services.FireStationService;
@@ -59,7 +60,7 @@ class FireStationControllerTest {
 
 	@Test
 
-	void whenDeleteFireStationByStation() throws DaoException {
+	void whenDeleteFireStationByStation() throws DaoException, ControllerException {
 
 		int station = 1;
 		int index;
@@ -84,7 +85,7 @@ class FireStationControllerTest {
 
 	@Test
 
-	void whenDeleteFireStationByAddress() throws DaoException {
+	void whenDeleteFireStationByAddress() throws DaoException, ControllerException {
 
 		String address = "address2";
 		fireStation2.setAllAttributes("address2", 2);

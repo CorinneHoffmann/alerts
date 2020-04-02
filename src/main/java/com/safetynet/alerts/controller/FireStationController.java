@@ -5,7 +5,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.safetynet.alerts.dao.FireStationDao;
+import com.safetynet.alerts.exception.ControllerException;
 import com.safetynet.alerts.exception.DaoException;
 import com.safetynet.alerts.model.FireStation;
 import com.safetynet.alerts.services.FireStationService;
@@ -53,13 +53,20 @@ public class FireStationController {
 	}
 
 	@DeleteMapping(value = "/address")
-	public FireStation deleteFireStationByAddress(@RequestParam(value = "address", required = true) String address) throws DaoException {
+	public FireStation deleteFireStationByAddress(@RequestParam(value = "address", required = false) String address) throws DaoException, ControllerException {
+		if (address.isEmpty()) {
+			throw new ControllerException("Vous devez saisir les paramètres attendus dans l'URL");
+		}
 		logger.info("DELETE_FIRESTATION " + address);
 		return fireStationService.deleteFireStationByAddress(address);
+		
 	}
 
 	@DeleteMapping(value = "/station")
-	public List<FireStation> deleteFireStationByStation(@RequestParam(value = "station", required = true) int station) throws DaoException {
+	public List<FireStation> deleteFireStationByStation(@RequestParam(value = "station", required = false) Integer station) throws DaoException, ControllerException {
+		if (station == null) {
+			throw new ControllerException("Vous devez saisir les paramètres attendus dans l'URL");
+		}
 		logger.info("DELETE_FIRESTATION " + station);
 		return fireStationService.deleteFireStationByStation(station);
 	}

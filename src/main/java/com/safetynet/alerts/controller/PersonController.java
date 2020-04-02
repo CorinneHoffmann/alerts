@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.safetynet.alerts.dao.PersonDao;
-import com.safetynet.alerts.exception.ControllerPersonException;
+import com.safetynet.alerts.exception.ControllerException;
 import com.safetynet.alerts.exception.DaoException;
 import com.safetynet.alerts.model.Person;
 import com.safetynet.alerts.services.PersonService;
@@ -58,13 +58,13 @@ public class PersonController {
 	@DeleteMapping
 	public Person deletePerson(@RequestParam(value = "firstName", required = false) String firstName,
 			@RequestParam(value = "lastName", required = false) String lastName)
-			throws DaoException, ControllerPersonException {
+			throws DaoException, ControllerException {
 
 		if (firstName.isEmpty()) {
-			throw new ControllerPersonException("Vous devez saisir les paramètres firstName and lastName ");
+			throw new ControllerException("Vous devez saisir les paramètres attendus dans l'URL");
 		}
 		if (lastName.isEmpty()) {
-			throw new ControllerPersonException("Vous devez saisir les paramètres firstName and lastName ");
+			throw new ControllerException("Vous devez saisir les paramètres attendus dans l'URL");
 		}
 		logger.info("QUERY_DELETE_PERSON " + firstName + " " + lastName);
 		return personService.deletePerson(firstName, lastName);

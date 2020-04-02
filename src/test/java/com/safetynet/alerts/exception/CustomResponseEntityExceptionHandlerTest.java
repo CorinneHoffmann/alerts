@@ -28,7 +28,7 @@ class CustomResponseEntityExceptionHandlerTest {
 	}
 
 	@Test
-	public void whenhandleNotFoundException() {
+	public void whenHandleNotFoundException() {
 		String message = "objet absent des listes";
 		DaoException ex = new DaoException(message);
 
@@ -39,11 +39,22 @@ class CustomResponseEntityExceptionHandlerTest {
 	}
 
 	@Test
-	public void whenhandleRuntimeException() {
+	public void whenHandleRuntimeException() {
 		RuntimeException ex = new RuntimeException();
 
 		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,
 				customResponseEntityExceptionHandler.handleRuntimeException(ex).getHttpStatus());
+	}
+	
+	@Test
+	public void whenHandleControllerException() {
+		String message = "parametres URL absents";
+		ControllerException ex = new ControllerException(message);
+
+		assertEquals(HttpStatus.BAD_REQUEST,
+				customResponseEntityExceptionHandler.handleControllerException(ex).getHttpStatus());
+		assertEquals(message, customResponseEntityExceptionHandler.handleControllerException(ex).getMessage());
+
 	}
 }
 

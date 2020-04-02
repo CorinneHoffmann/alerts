@@ -22,7 +22,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.safetynet.alerts.dao.PersonDao;
-import com.safetynet.alerts.exception.ControllerPersonException;
+import com.safetynet.alerts.exception.ControllerException;
 import com.safetynet.alerts.exception.DaoException;
 import com.safetynet.alerts.model.FireStation;
 import com.safetynet.alerts.model.Person;
@@ -98,7 +98,7 @@ class PersonControllerTest {
 	}
 
 	@Test
-	void whenDeletePerson() throws DaoException, ControllerPersonException{
+	void whenDeletePerson() throws DaoException, ControllerException{
 		person2.setAllAttributes("Toto2", "Toto2 name", "Toto2 address", "Toto2 city",
 				"Toto2 zip", "Toto2 phone", "Toto2 email");
 

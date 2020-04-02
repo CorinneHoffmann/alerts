@@ -20,17 +20,17 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
 	@ResponseBody
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	public ApiResponse handleNotFoundException(DaoException e) {
-		logger.error("PERSON NOT_FOUND");
+		logger.error("OBJET NOT_FOUND");
 		ApiResponse apiresponse = new ApiResponse(HttpStatus.NOT_FOUND , e.getMessage());
 		return apiresponse;
 	}
 
-	@ExceptionHandler(ControllerPersonException.class)
+	@ExceptionHandler(ControllerException.class)
 	@ResponseBody
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	public ApiResponse handleNotFoundException(ControllerPersonException e) {
+	public ApiResponse handleControllerException(ControllerException ex) {
 		logger.error("PARAMETRE NOT INFORMED");
-		ApiResponse apiresponse = new ApiResponse(HttpStatus.BAD_REQUEST , e.getMessage());
+		ApiResponse apiresponse = new ApiResponse(HttpStatus.BAD_REQUEST , ex.getMessage());
 		return apiresponse;
 	}
 	

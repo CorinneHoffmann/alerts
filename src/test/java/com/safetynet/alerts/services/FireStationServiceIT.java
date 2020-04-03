@@ -16,6 +16,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.safetynet.alerts.dao.FireStationDao;
+import com.safetynet.alerts.exception.DaoCreationException;
 import com.safetynet.alerts.exception.DaoException;
 import com.safetynet.alerts.model.FireStation;
 
@@ -38,14 +39,14 @@ class FireStationServiceIT {
 	LoadFireStationService loadFireStationService;
 
 	@BeforeEach
-	private void setUpPerTest() throws JsonMappingException, ClassNotFoundException, IOException, SQLException {
+	private void setUpPerTest() throws JsonMappingException, ClassNotFoundException, IOException {
 		fireStationDao.deleteAllFireStation();
 		loadFireStationService.loadData();
 		listFireStation = fireStationDao.getAllFireStation();
 	}
 
 	@Test
-	void createFireStationServiceTest() {
+	void createFireStationServiceTest() throws DaoCreationException {
 
 		fireStation.setAllAttributes("addresseCreate", 0);
 		fireStationService.createFireStation(fireStation);

@@ -2,6 +2,7 @@ package com.safetynet.alerts.dao;
 
 import java.util.List;
 
+import com.safetynet.alerts.exception.DaoCreationException;
 import com.safetynet.alerts.exception.DaoException;
 import com.safetynet.alerts.model.Person;
 
@@ -11,7 +12,7 @@ public interface PersonDao {
 
 	public void SetAllPerson(List<Person> listPerson);
 
-	public Person createPerson(Person person);
+	public Person createPerson(Person person) throws DaoCreationException;
 
 	public Person updatePerson(Person person) throws DaoException;
 

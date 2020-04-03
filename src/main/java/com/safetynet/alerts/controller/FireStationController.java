@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.safetynet.alerts.dao.FireStationDao;
 import com.safetynet.alerts.exception.ControllerException;
+import com.safetynet.alerts.exception.DaoCreationException;
 import com.safetynet.alerts.exception.DaoException;
 import com.safetynet.alerts.model.FireStation;
 import com.safetynet.alerts.services.FireStationService;
@@ -41,7 +42,7 @@ public class FireStationController {
 	}
 
 	@PostMapping
-	public FireStation createFireStation(@RequestBody FireStation fireStation) {
+	public FireStation createFireStation(@RequestBody FireStation fireStation) throws DaoCreationException {
 		logger.info("CREATE_FIRESTATION " + fireStation.getAddress() + " " + fireStation.getStation());
 		return fireStationService.createFireStation(fireStation);
 	}

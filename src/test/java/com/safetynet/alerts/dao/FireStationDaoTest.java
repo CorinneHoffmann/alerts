@@ -15,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
+import com.safetynet.alerts.exception.DaoCreationException;
 import com.safetynet.alerts.exception.DaoException;
 import com.safetynet.alerts.model.FireStation;
 import com.safetynet.alerts.services.LoadFireStationService;
@@ -36,7 +37,7 @@ class FireStationDaoTest {
 	LoadFireStationService loadFireStationService;
 
 	@BeforeEach
-	private void setUpPerTest() throws JsonMappingException, ClassNotFoundException, IOException, SQLException {
+	private void setUpPerTest() throws JsonMappingException, ClassNotFoundException, IOException {
 		fireStationDao.deleteAllFireStation();
 		loadFireStationService.loadData();
 		listFireStation = fireStationDao.getAllFireStation();
@@ -49,7 +50,7 @@ class FireStationDaoTest {
 	}
 	
 	@Test
-	void createFireStationTest() {
+	void createFireStationTest() throws DaoCreationException {
 
 		fireStation.setAllAttributes("addresseCreate", 0);
 		fireStationDao.createFireStation(fireStation);
@@ -59,7 +60,7 @@ class FireStationDaoTest {
 	
 	@Test
 	void updateFireStationTest() throws DaoException {
-		fireStation = fireStationDao.getFireStation("address1");
+		fireStation = listFireStation.get(0);
 		fireStation.setStation(4);
 		fireStationDao.updateFireStation(fireStation);
 		assertEquals("address1", listFireStation.get(0).getAddress());

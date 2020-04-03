@@ -28,7 +28,7 @@ import com.safetynet.alerts.services.FireStationService;
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-class FireStationControllerTestIT {
+class FireStationControllerIT {
 
 	@Autowired
 	private MockMvc mockmvc;

@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.safetynet.alerts.exception.DaoCreationException;
 import com.safetynet.alerts.exception.DaoException;
 import com.safetynet.alerts.model.FireStation;
 
@@ -38,10 +39,24 @@ public class FireStationDaoImpl implements FireStationDao {
 	}
 
 	@Override
-	public FireStation createFireStation(FireStation fireStation) {
+	public FireStation createFireStation(FireStation fireStation) throws DaoCreationException {
 		this.fireStation = fireStation;
+
+		int index;
+		boolean findOK = false;
+
+		for (index = 0; index < listFireStation.size(); index++) {
+			if (listFireStation.get(index).getAddress().contentEquals(fireStation.getAddress()) == true) {
+				findOK = true;
+			}
+		}
+		if (findOK == true) {
+			logger.error("RESPONSE_FIRESTATION_ALREADY_EXISTS " + fireStation.getAddress());
+			throw new DaoCreationException("La station que vous voulez creer existe deja");
+		}
+
 		listFireStation.add(fireStation);
-		logger.info("FIRESTATION CREATED " + fireStation.getAddress() + " " + fireStation.getStation());
+		logger.info("RESPONSE_FIRESTATION_CREATED " + fireStation.getAddress() + " " + fireStation.getStation());
 		return fireStation;
 	}
 
@@ -49,16 +64,17 @@ public class FireStationDaoImpl implements FireStationDao {
 	public FireStation updateFireStation(FireStation fireStation) throws DaoException {
 		this.fireStation = fireStation;
 		int index;
-		boolean updateOK = false;
+		boolean findOK = false;
 		for (index = 0; index < listFireStation.size(); index++) {
 			if (listFireStation.get(index).getAddress().contentEquals(fireStation.getAddress()) == true) {
 				listFireStation.get(index).setStation(fireStation.getStation());
-				logger.info("FIRESTATION UPDATED " + fireStation.getAddress() + " " + fireStation.getStation());
-				updateOK = true;
+				logger.info(
+						"RESPONSE_FIRESTATION_UPDATED " + fireStation.getAddress() + " " + fireStation.getStation());
+				findOK = true;
 			}
 		}
-		if (updateOK == false) {
-			logger.error("FIRESTATION NOT FOUND FOR UPDATE " + fireStation.getAddress());
+		if (findOK == false) {
+			logger.error("RESPONSE_FIRESTATION_NOT_FOUND_FOR_UPDATE " + fireStation.getAddress());
 			throw new DaoException("La station que vous voulez modifier n\'est pas dans la liste");
 		}
 		return fireStation;
@@ -73,13 +89,13 @@ public class FireStationDaoImpl implements FireStationDao {
 			if (listFireStation.get(index).getAddress().contentEquals(address) == true) {
 				fireStation = listFireStation.get(index);
 				listFireStation.remove(index);
-				logger.info("FIRESTATION DELETED " + address);
+				logger.info("RESPONSE_FIRESTATION_DELETED_BY_STATION " + address);
 				index--;
 				updateOK = true;
 			}
 		}
 		if (updateOK == false) {
-			logger.error("FIRESTATION NOT FOUND FOR DELETE " + address);
+			logger.error("RESPONSE_FIRESTATION_NOT_FOUND_FOR_DELETE_BY_ADDRESS " + address);
 			throw new DaoException("L\'adresse de la fireStation que vous voulez supprimer n\'est pas dans la liste");
 		}
 		return fireStation;
@@ -100,14 +116,14 @@ public class FireStationDaoImpl implements FireStationDao {
 			}
 		}
 		if (updateOK == true) {
-			logger.info("FIRESTATION DELETED station " + station);
+			logger.info("RESPONSE_FIRESTATION_DELETED_STATION " + station);
 		}
 		if (updateOK == false) {
-			logger.error("FIRESTATION NOT FOUND FOR DELETE " + station);
+			logger.error("RESPONSE_FIRESTATION_NOT_FOUND_FOR_DELETE_BY_STATION " + station);
 			throw new DaoException("L\'id de la fireStation que vous voulez supprimer n\'est pas dans la liste");
 		}
 		for (index = 0; index < result.size(); index++) {
-			logger.info("FIRESTATION DELETED adress " + result.get(index).getAddress() + "station  "
+			logger.info("RESPONSE_FIRESTATION_DELETED_BY_STATION " + result.get(index).getAddress() + "station  "
 					+ result.get(index).getStation());
 		}
 		return result;

@@ -21,6 +21,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.safetynet.alerts.dao.PersonDao;
+import com.safetynet.alerts.exception.DaoCreationException;
 import com.safetynet.alerts.exception.DaoException;
 import com.safetynet.alerts.model.Person;
 
@@ -52,7 +53,7 @@ class PersonServiceTest {
 	}
 	
 	@Test
-	void whenCreatePerson(){
+	void whenCreatePerson() throws DaoCreationException{
 		person1.setAllAttributes("Toto1", "Toto1 name", "Toto1 address", "Toto1 city",
 				"Toto1 zip", "Toto1 phone", "Toto1 email");
 		personCreated.setAllAttributes("Totocreate", "Totocreate name", "Totocreate address", "Totocreate city",

@@ -15,6 +15,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.safetynet.alerts.dao.PersonDao;
+import com.safetynet.alerts.exception.DaoCreationException;
 import com.safetynet.alerts.exception.DaoException;
 import com.safetynet.alerts.model.Person;
 
@@ -37,14 +38,14 @@ class PersonServiceIT {
 	LoadPersonService loadPersonService;
 
 	@BeforeEach
-	private void setUpPerTest() throws JsonMappingException, ClassNotFoundException, IOException, SQLException {
+	private void setUpPerTest() throws JsonMappingException, ClassNotFoundException, IOException{
 		personDao.deleteAllPerson();
 		loadPersonService.loadData();
 		listPerson = personDao.getAllPerson();
 	}
 
 	@Test
-	void createPersonServiceTest() {
+	void createPersonServiceTest() throws DaoCreationException {
 
 		person.setAllAttributes("Totocreate", "Toto3create name", "Totocreate address", "Totocreate city",
 				"Totocreate zip", "Totocreate phone", "Totocreate email");

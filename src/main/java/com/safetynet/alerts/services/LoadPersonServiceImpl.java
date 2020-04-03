@@ -3,7 +3,6 @@ package com.safetynet.alerts.services;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -29,22 +28,22 @@ public class LoadPersonServiceImpl implements LoadPersonService {
 	PersonDao personDao;
 
 	List<Person> listPerson = new ArrayList<Person>();
-	
+
 	Logger logger = LoggerFactory.getLogger(LoadPersonServiceImpl.class);
-	
+
 	@Value("${filename}")
 	private String filename;
 
-	@PostConstruct	
+	@PostConstruct
 	@Override
-	public void loadData() throws JsonMappingException, IOException, ClassNotFoundException, SQLException {
+	public void loadData() throws JsonMappingException, IOException, ClassNotFoundException {
 
 		// Open file
 		FileInputStream fs = null;
 		try {
 			fs = new FileInputStream(filename);
 		} catch (FileNotFoundException e) {
-			logger.error("FILE_NOT_FOUND" +filename);
+			logger.error("FILE_NOT_FOUND" + filename);
 		}
 
 		// Positionnement sur le JSON persons et set de la liste vers PersonDao
@@ -73,16 +72,10 @@ public class LoadPersonServiceImpl implements LoadPersonService {
 		try {
 			fs.close();
 		} catch (IOException e) {
-			logger.error("PROBLEM TO CLOSE FILE" +filename);
+			logger.error("PROBLEM TO CLOSE FILE" + filename);
 		}
 		// set DAO
 		personDao.SetAllPerson(listPerson);
-		listPerson = personDao.getAllPerson();
-		int index;
-		for (index=0;index<listPerson.size();index++)
-		{System.out.println("Person : " +listPerson.get(index).getFirstName());
-		}
-
+		
 	}
-
 }

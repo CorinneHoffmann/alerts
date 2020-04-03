@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.safetynet.alerts.dao.PersonDao;
+import com.safetynet.alerts.exception.DaoCreationException;
 import com.safetynet.alerts.exception.DaoException;
 import com.safetynet.alerts.model.Person;
 
@@ -20,16 +21,16 @@ public class PersonServiceImpl implements PersonService {
 	private String lastName;
 
 	@Override
-	public Person createPerson(Person person) {
+	public Person createPerson(Person person) throws DaoCreationException {
 		this.person = person;
-		personDao.createPerson(person);
+		person = personDao.createPerson(person);
 		return person;
 	}
 
 	@Override
 	public Person updatePerson(Person person) throws DaoException {
 		this.person = person;
-		personDao.updatePerson(person);
+		person = personDao.updatePerson(person);
 		return person;
 	}
 	

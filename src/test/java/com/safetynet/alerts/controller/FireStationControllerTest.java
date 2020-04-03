@@ -25,6 +25,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.safetynet.alerts.dao.FireStationDao;
 import com.safetynet.alerts.exception.ControllerException;
+import com.safetynet.alerts.exception.DaoCreationException;
 import com.safetynet.alerts.exception.DaoException;
 import com.safetynet.alerts.model.FireStation;
 import com.safetynet.alerts.services.FireStationService;
@@ -53,7 +54,7 @@ class FireStationControllerTest {
 	FireStation fireStationUpdated = new FireStation();
 
 	@BeforeEach
-	private void setUpPerTest() throws JsonMappingException, ClassNotFoundException, IOException, SQLException {
+	private void setUpPerTest() throws JsonMappingException, ClassNotFoundException, IOException {
 		fireStationDao.deleteAllFireStation();
 		listFireStation.clear();
 	}
@@ -93,24 +94,18 @@ class FireStationControllerTest {
 		when(fireStationService.deleteFireStationByAddress(address)).thenReturn(fireStation2);
 		FireStation result = fireStationController.deleteFireStationByAddress(address);
 
-		System.out.println("whenDeleteFireStationByAddress result");
-		System.out.println(result.getAddress() + " " + result.getStation());
-
 		assertEquals("address2", result.getAddress());
 		assertEquals(2, result.getStation());
 	}
 
 	@Test
 
-	void whenCreateFireStation() {
+	void whenCreateFireStation() throws DaoCreationException {
 
 		fireStationCreated.setAllAttributes("address4", 4);
 
 		when(fireStationService.createFireStation(fireStationCreated)).thenReturn(fireStationCreated);
 		FireStation result = fireStationController.createFireStation(fireStationCreated);
-
-		System.out.println("whenCreateFireStation result");
-		System.out.println(result.getAddress() + " " + result.getStation());
 
 		assertEquals("address4", result.getAddress());
 		assertEquals(4, result.getStation());
@@ -126,9 +121,6 @@ class FireStationControllerTest {
 
 		when(fireStationService.updateFireStation(fireStation4)).thenReturn(fireStationUpdated);
 		FireStation result = fireStationController.updateFireStation(fireStation4);
-
-		System.out.println("whenUpdateFireStation result");
-		System.out.println(result.getAddress() + " " + result.getStation());
 
 		assertEquals("address3", result.getAddress());
 		assertEquals(3, result.getStation());

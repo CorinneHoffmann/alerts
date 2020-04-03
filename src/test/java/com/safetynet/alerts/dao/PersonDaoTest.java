@@ -14,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
+import com.safetynet.alerts.exception.DaoCreationException;
 import com.safetynet.alerts.exception.DaoException;
 import com.safetynet.alerts.model.Person;
 import com.safetynet.alerts.services.LoadPersonService;
@@ -35,7 +36,7 @@ class PersonDaoTest {
 	LoadPersonService loadPersonService;
 
 	@BeforeEach
-	private void setUpPerTest() throws JsonMappingException, ClassNotFoundException, IOException, SQLException {
+	private void setUpPerTest() throws JsonMappingException, ClassNotFoundException, IOException {
 		personDao.deleteAllPerson();
 		loadPersonService.loadData();
 		listPerson = personDao.getAllPerson();
@@ -48,7 +49,7 @@ class PersonDaoTest {
 	}
 
 	@Test
-	void createPersonTest() {
+	void createPersonTest() throws DaoCreationException {
 
 		person.setAllAttributes("Totocreate", "Toto3create name", "Totocreate address", "Totocreate city",
 				"Totocreate zip", "Totocreate phone", "Totocreate email");
@@ -60,7 +61,7 @@ class PersonDaoTest {
 	@Test
 	void updatePersonTest() throws DaoException {
 
-		person = personDao.getPerson("Toto1", "Toto1 name");
+		person = listPerson.get(0);
 		person.setAddress("updateaddresse1");
 		person.setEmail("updateToto1@email.com");
 		personDao.updatePerson(person);
@@ -79,7 +80,7 @@ class PersonDaoTest {
 	void getPersonTest() throws DaoException {
 
 		person = personDao.getPerson("Toto4", "Toto4 name");
-		assertEquals(6, personDao.getAllPerson().size());
+	
 		assertEquals("Toto4", person.getFirstName());
 		assertEquals("Toto4 name", person.getLastName());
 	}

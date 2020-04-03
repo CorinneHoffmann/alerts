@@ -1,5 +1,7 @@
 package com.safetynet.alerts.exception;
 
+import java.text.ParseException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -20,8 +22,17 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
 	@ResponseBody
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	public ApiResponse handleNotFoundException(DaoException e) {
-		logger.error("OBJET NOT_FOUND");
+		logger.error("OBJET_NOT_FOUND");
 		ApiResponse apiresponse = new ApiResponse(HttpStatus.NOT_FOUND , e.getMessage());
+		return apiresponse;
+	}
+	
+	@ExceptionHandler(DaoCreationException.class)
+	@ResponseBody
+	@ResponseStatus(HttpStatus.FOUND)
+	public ApiResponse handleFoundException(DaoCreationException e) {
+		logger.error("OBJET_FOUND");
+		ApiResponse apiresponse = new ApiResponse(HttpStatus.FOUND , e.getMessage());
 		return apiresponse;
 	}
 
@@ -29,8 +40,17 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
 	@ResponseBody
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public ApiResponse handleControllerException(ControllerException ex) {
-		logger.error("PARAMETRE NOT INFORMED");
+		logger.error("PARAMETRE_NOT_INFORMED");
 		ApiResponse apiresponse = new ApiResponse(HttpStatus.BAD_REQUEST , ex.getMessage());
+		return apiresponse;
+	}
+	
+	@ExceptionHandler(ParseException.class)
+	@ResponseBody
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	public ApiResponse handleParseException(ParseException ex) {
+		logger.error("JSON_ERROR_CONVERSION_DATE");
+		ApiResponse apiresponse = new ApiResponse(HttpStatus.INTERNAL_SERVER_ERROR , "JSON_ERROR_CONVERSION_DATE");
 		return apiresponse;
 	}
 	

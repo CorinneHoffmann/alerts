@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.safetynet.alerts.dao.PersonDao;
 import com.safetynet.alerts.exception.ControllerException;
+import com.safetynet.alerts.exception.DaoCreationException;
 import com.safetynet.alerts.exception.DaoException;
 import com.safetynet.alerts.model.Person;
 import com.safetynet.alerts.services.PersonService;
@@ -35,7 +38,7 @@ public class PersonController {
 	@Autowired
 	PersonService personService;
 
-	// @GetMapping(value = "/person")
+	//@GetMapping(value = "/person")
 	@GetMapping
 	List<Person> list() {
 		return personDao.getAllPerson();
@@ -43,16 +46,18 @@ public class PersonController {
 
 	// @PostMapping(value = "/person", consumes = MediaType.APPLICATION_JSON_VALUE)
 	@PostMapping
-	public Person createPerson(@RequestBody Person person) {
-		logger.info("CREATE_PERSON " + person.getFirstName() + " " + person.getLastName());
-		return personService.createPerson(person);
+	public Person createPerson(@RequestBody Person person) throws DaoCreationException {
+		logger.info("QUERY_CREATE_PERSON " + person.getFirstName() + " " + person.getLastName());
+		person = personService.createPerson(person);
+		return person;
 	}
 
 	// @PutMapping(value = "/person", consumes = MediaType.APPLICATION_JSON_VALUE)
 	@PutMapping
 	public Person updatePerson(@RequestBody Person person) throws DaoException {
-		logger.info("UPDATE_PERSON " + person.getFirstName() + " " + person.getLastName());
-		return personService.updatePerson(person);
+		logger.info("QUERY_UPDATE_PERSON " + person.getFirstName() + " " + person.getLastName());
+		person =  personService.updatePerson(person);
+		return person;
 	}
 
 	@DeleteMapping
@@ -67,7 +72,7 @@ public class PersonController {
 			throw new ControllerException("Vous devez saisir les paramètres attendus dans l'URL");
 		}
 		logger.info("QUERY_DELETE_PERSON " + firstName + " " + lastName);
-		return personService.deletePerson(firstName, lastName);
-
+		person = personService.deletePerson(firstName, lastName);
+		return person;
 	}
 }

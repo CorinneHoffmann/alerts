@@ -26,6 +26,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.safetynet.alerts.dao.FireStationDao;
+import com.safetynet.alerts.exception.DaoCreationException;
 import com.safetynet.alerts.exception.DaoException;
 import com.safetynet.alerts.model.FireStation;
 
@@ -58,7 +59,7 @@ class FireStationServiceTest {
 	}
 
 	@Test
-	void whenCreateFireStation() {
+	void whenCreateFireStation() throws DaoCreationException {
 
 		fireStationCreated.setAllAttributes("address4", 4);
 

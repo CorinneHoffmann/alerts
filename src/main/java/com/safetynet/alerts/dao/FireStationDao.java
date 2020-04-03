@@ -2,6 +2,7 @@ package com.safetynet.alerts.dao;
 
 import java.util.List;
 
+import com.safetynet.alerts.exception.DaoCreationException;
 import com.safetynet.alerts.exception.DaoException;
 import com.safetynet.alerts.model.FireStation;
 
@@ -11,7 +12,7 @@ public interface FireStationDao {
 
 	public void SetAllFireStation(List<FireStation> fireStation);
 
-	public FireStation createFireStation(FireStation fireStation);
+	public FireStation createFireStation(FireStation fireStation) throws DaoCreationException;
 
 	public FireStation updateFireStation(FireStation fireStation) throws DaoException;
 

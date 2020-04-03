@@ -23,6 +23,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.safetynet.alerts.dao.PersonDao;
 import com.safetynet.alerts.exception.ControllerException;
+import com.safetynet.alerts.exception.DaoCreationException;
 import com.safetynet.alerts.exception.DaoException;
 import com.safetynet.alerts.model.FireStation;
 import com.safetynet.alerts.model.Person;
@@ -50,13 +51,13 @@ class PersonControllerTest {
 	Person personUpdated = new Person();
 
 	@BeforeEach
-	private void setUpPerTest() throws JsonMappingException, ClassNotFoundException, IOException, SQLException {
+	private void setUpPerTest() throws JsonMappingException, ClassNotFoundException, IOException {
 		personDao.deleteAllPerson();
 		listPerson.clear();
 	}
 	
 	@Test
-	void whenCreatePerson(){
+	void whenCreatePerson() throws DaoCreationException{
 		person1.setAllAttributes("Toto1", "Toto1 name", "Toto1 address", "Toto1 city",
 				"Toto1 zip", "Toto1 phone", "Toto1 email");
 		personCreated.setAllAttributes("Totocreate", "Totocreate name", "Totocreate address", "Totocreate city",
@@ -64,9 +65,7 @@ class PersonControllerTest {
 
 		when(personService.createPerson(person1)).thenReturn(personCreated);
 		Person result = personController.createPerson(person1);
-		System.out.println("whenCreatePerson result");
-		System.out.println(result.getFirstName() + " " + result.getLastName());
-
+		
 		assertEquals("Totocreate", result.getFirstName());
 		assertEquals("Totocreate name", result.getLastName());
 		assertEquals("Totocreate address", result.getAddress());

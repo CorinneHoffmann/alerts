@@ -84,7 +84,6 @@ class CustomResponseEntityExceptionHandlerTest {
 		assertEquals(HttpStatus.FOUND,
 				customResponseEntityExceptionHandler.handleFoundException(ex).getHttpStatus());
 		assertEquals(message, customResponseEntityExceptionHandler.handleFoundException(ex).getMessage());
-
 	}
 }
 

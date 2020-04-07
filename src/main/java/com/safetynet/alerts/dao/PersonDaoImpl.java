@@ -136,19 +136,20 @@ public class PersonDaoImpl implements PersonDao {
 	}
 
 	@Override
-	public List<String> GetFamilly(String address, String firstName) {
+	public List<Person> GetFamilly(String address, String firstName) {
 		this.addres = address;
 		this.firstName = firstName;
-		String firstNameMembers;
+		//String firstNameMembers;
 		int index;
 		boolean findOK = false;
-		listMembers = new ArrayList<String>();;
+		List<Person> listMembers = new ArrayList<Person>();
 		for (index = 0; index < listPerson.size(); index++) {
 			if ((listPerson.get(index).getAddress().contentEquals(address) == true) &&
 				(listPerson.get(index).getFirstName().contentEquals(firstName) == false))	
 			{
-				firstNameMembers = listPerson.get(index).getFirstName();
-				listMembers.add(firstNameMembers);
+				person = listPerson.get(index);
+				//firstNameMembers = listPerson.get(index).getFirstName();
+				listMembers.add(person);
 				findOK = true;
 			}
 		}

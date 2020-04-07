@@ -15,6 +15,8 @@ import com.safetynet.alerts.exception.DaoException;
 import com.safetynet.alerts.exception.ServiceException;
 import com.safetynet.alerts.model.EndPointChildAlert;
 import com.safetynet.alerts.model.EndPointEmail;
+import com.safetynet.alerts.model.EndPointFireStation;
+import com.safetynet.alerts.model.EndPointFireStationAndCount;
 import com.safetynet.alerts.services.EndPointService;
 
 @RestController("endPointController")
@@ -45,6 +47,17 @@ public class EndPointController {
 		}
 		logger.info("QUERY_CHILD_ALERT ");
 		return endPointService.getChildAlert(address);
+	}
+	
+	
+	@GetMapping(value = "/firestation")
+	EndPointFireStationAndCount getPersonsByFireStation(@RequestParam(value = "stationNumber", required = false) Integer stationNumber)
+			throws ControllerException, DaoException {
+		if (stationNumber == null) {
+			throw new ControllerException("Vous devez saisir les paramètres attendus dans l'URL");
+		}
+		logger.info("QUERY_PERSON_BY_FIRESTATION_AND_COUNT ");
+		return endPointService.getPersonsByFireStation(stationNumber);
 	}
 
 }

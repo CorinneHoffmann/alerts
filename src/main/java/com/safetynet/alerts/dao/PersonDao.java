@@ -8,7 +8,7 @@ import com.safetynet.alerts.model.Person;
 
 public interface PersonDao {
 
-	public List<String> GetFamilly(String address, String firstName);
+	public List<Person> GetFamilly(String address, String firstName);
 
 	public List<Person> getAllPerson();
 

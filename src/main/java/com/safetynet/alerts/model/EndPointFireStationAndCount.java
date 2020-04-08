@@ -7,15 +7,16 @@ import org.springframework.stereotype.Component;
 @Component("endPointFireStationAndCount")
 public class EndPointFireStationAndCount {
 	
-	private List<EndPointFireStation> endPointFireStation;
+	private List<EndPointFireStationDetail> endPointFireStationList;
 	private int nbAdult;
 	private int nbChild;
 	
-	public List<EndPointFireStation> getEndPointFireStation() {
-		return endPointFireStation;
+	
+	public List<EndPointFireStationDetail> getEndPointFireStationList() {
+		return endPointFireStationList;
 	}
-	public void setEndPointFireStation(List<EndPointFireStation> endPointFireStation) {
-		this.endPointFireStation = endPointFireStation;
+	public void setEndPointFireStationList(List<EndPointFireStationDetail> endPointFireStationList) {
+		this.endPointFireStationList = endPointFireStationList;
 	}
 	public int getNbAdult() {
 		return nbAdult;

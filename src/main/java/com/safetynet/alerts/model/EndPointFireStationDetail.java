@@ -2,8 +2,8 @@ package com.safetynet.alerts.model;
 
 import org.springframework.stereotype.Component;
 
-@Component("endPointFireStation")
-public class EndPointFireStation {
+@Component("endPointFireStationDetail")
+public class EndPointFireStationDetail {
 
 	
 	private String firstName;

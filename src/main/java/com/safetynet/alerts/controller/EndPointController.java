@@ -15,8 +15,11 @@ import com.safetynet.alerts.exception.DaoException;
 import com.safetynet.alerts.exception.ServiceException;
 import com.safetynet.alerts.model.EndPointChildAlert;
 import com.safetynet.alerts.model.EndPointEmail;
-import com.safetynet.alerts.model.EndPointFireStation;
+import com.safetynet.alerts.model.EndPointFireAndNumberStation;
 import com.safetynet.alerts.model.EndPointFireStationAndCount;
+import com.safetynet.alerts.model.EndPointFlood;
+import com.safetynet.alerts.model.EndPointPersonInfo;
+import com.safetynet.alerts.model.EndPointPhoneAlert;
 import com.safetynet.alerts.services.EndPointService;
 
 @RestController("endPointController")
@@ -31,7 +34,7 @@ public class EndPointController {
 
 	@GetMapping(value = "/communityEmail")
 	EndPointEmail getEmailByCity(@RequestParam(value = "city", required = false) String city)
-			throws ControllerException, ServiceException {
+			throws ControllerException {
 		if (city.isEmpty()) {
 			throw new ControllerException("Vous devez saisir les paramètres attendus dans l'URL");
 		}
@@ -40,7 +43,7 @@ public class EndPointController {
 	}
 	
 	@GetMapping(value = "/childAlert")
-	List<EndPointChildAlert> getChildAlert(@RequestParam(value = "address", required = false) String address)
+	EndPointChildAlert getChildAlert(@RequestParam(value = "address", required = false) String address)
 			throws ControllerException, DaoException {
 		if (address.isEmpty()) {
 			throw new ControllerException("Vous devez saisir les paramètres attendus dans l'URL");
@@ -60,4 +63,47 @@ public class EndPointController {
 		return endPointService.getPersonsByFireStation(stationNumber);
 	}
 
+	@GetMapping(value = "/phoneAlert")
+	EndPointPhoneAlert getPhoneByStation(@RequestParam(value = "firestation", required = false) Integer firestation)
+			throws ControllerException {
+		if (firestation == null)  {
+			throw new ControllerException("Vous devez saisir les paramètres attendus dans l'URL");
+		}
+		logger.info("QUERY_PHONE_ALERT ");
+		return endPointService.getPhoneByStation(firestation);
+	}
+	
+	@GetMapping(value = "/fire")
+	EndPointFireAndNumberStation getFireByAddress(@RequestParam(value = "address", required = false) String address)
+			throws ControllerException, DaoException {
+		if (address.isEmpty()) {
+			throw new ControllerException("Vous devez saisir les paramètres attendus dans l'URL");
+		}
+		logger.info("QUERY_FIRE_AND_NUMBER_STATION ");
+		return endPointService.getFireByAddress(address);
+	}
+	
+	@GetMapping(value = "/flood")
+	EndPointFlood getFlood(@RequestParam(value = "stations", required = false) List<Integer> stations)
+			throws ControllerException, DaoException {
+		if (stations.size() == 0) {
+			throw new ControllerException("Vous devez saisir les paramètres attendus dans l'URL");
+		}
+		logger.info("QUERY_FLOOD ");
+		return endPointService.getFlood(stations);
+	}
+	
+	@GetMapping(value = "/personInfo")
+	EndPointPersonInfo getPersonInfo(@RequestParam(value = "firstName", required = false) String firstName,
+									 @RequestParam(value = "lastName", required = false) String lastName)
+			throws ControllerException, DaoException {
+		if (lastName.isEmpty()) {
+			throw new ControllerException("Vous devez saisir les paramètres attendus dans l'URL");
+		}
+		logger.info("QUERY_PERSON_INFO");
+		return endPointService.getPersonInfo(firstName,lastName);
+	}
+	
+	
+	
 }

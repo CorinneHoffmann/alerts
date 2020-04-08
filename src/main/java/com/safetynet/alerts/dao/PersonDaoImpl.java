@@ -1,5 +1,6 @@
 package com.safetynet.alerts.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -20,8 +21,11 @@ public class PersonDaoImpl implements PersonDao {
 	List<Person> listPerson;
 	String firstName;
 	String lastName;
+	List<String> listMembers;
 
 	Logger logger = LoggerFactory.getLogger(PersonDaoImpl.class);
+
+	private String addres;
 
 	@Override
 	public List<Person> getAllPerson() {
@@ -129,6 +133,27 @@ public class PersonDaoImpl implements PersonDao {
 		}
 		logger.info("RESPONSE_PERSON_DELETED " + firstName + " " + lastName);
 		return person;
+	}
+
+	@Override
+	public List<Person> GetFamilly(String address, String firstName) {
+		this.addres = address;
+		this.firstName = firstName;
+		//String firstNameMembers;
+		int index;
+		boolean findOK = false;
+		List<Person> listMembers = new ArrayList<Person>();
+		for (index = 0; index < listPerson.size(); index++) {
+			if ((listPerson.get(index).getAddress().contentEquals(address) == true) &&
+				(listPerson.get(index).getFirstName().contentEquals(firstName) == false))	
+			{
+				person = listPerson.get(index);
+				//firstNameMembers = listPerson.get(index).getFirstName();
+				listMembers.add(person);
+				findOK = true;
+			}
+		}
+		return listMembers;
 	}
 
 }

@@ -62,4 +62,14 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
 		ApiResponse apiresponse = new ApiResponse(HttpStatus.INTERNAL_SERVER_ERROR , e.getMessage());
 		return apiresponse;
 	}
+	
+	@ExceptionHandler(ServiceException.class)
+	@ResponseBody
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	public ApiResponse handleNotFoundException(ServiceException e) {
+		logger.error("OBJET_NOT_FOUND");
+		ApiResponse apiresponse = new ApiResponse(HttpStatus.NOT_FOUND , e.getMessage());
+		return apiresponse;
+	}
 }
+

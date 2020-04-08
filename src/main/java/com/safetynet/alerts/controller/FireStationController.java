@@ -22,7 +22,7 @@ import com.safetynet.alerts.model.FireStation;
 import com.safetynet.alerts.services.FireStationService;
 
 @RestController("fireStationController")
-@RequestMapping("/firestation")
+@RequestMapping("/fireStation")
 public class FireStationController {
 
 	Logger logger = LoggerFactory.getLogger(FireStationController.class);

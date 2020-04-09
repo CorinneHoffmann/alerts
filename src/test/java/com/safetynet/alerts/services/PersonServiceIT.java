@@ -50,8 +50,8 @@ class PersonServiceIT {
 		person.setAllAttributes("Totocreate", "Toto3create name", "Totocreate address", "Totocreate city",
 				"Totocreate zip", "Totocreate phone", "Totocreate email");
 		personService.createPerson(person);
-		assertEquals("Totocreate", listPerson.get(6).getFirstName());
-		assertEquals(7, listPerson.size());
+		assertEquals("Totocreate", listPerson.get(8).getFirstName());
+		assertEquals(9, listPerson.size());
 	}
 
 	@Test
@@ -68,7 +68,7 @@ class PersonServiceIT {
 	@Test
 	void deletePersonServiceTest() throws DaoException {
 		personService.deletePerson("Toto1","Toto1 name");
-		assertEquals(5, listPerson.size());
+		assertEquals(7, listPerson.size());
 		assertEquals("Toto2", listPerson.get(0).getFirstName());
 	}
 

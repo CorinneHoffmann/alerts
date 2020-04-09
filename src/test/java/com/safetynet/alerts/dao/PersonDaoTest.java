@@ -44,7 +44,7 @@ class PersonDaoTest {
 
 	@Test
 	void loadDataTest() {
-		assertEquals(6, personDao.getAllPerson().size());
+		assertEquals(8, personDao.getAllPerson().size());
 		assertEquals("Toto1", personDao.getAllPerson().get(0).getFirstName());
 	}
 
@@ -54,8 +54,8 @@ class PersonDaoTest {
 		person.setAllAttributes("Totocreate", "Toto3create name", "Totocreate address", "Totocreate city",
 				"Totocreate zip", "Totocreate phone", "Totocreate email");
 		personDao.createPerson(person);
-		assertEquals("Totocreate", listPerson.get(6).getFirstName());
-		assertEquals(7, listPerson.size());
+		assertEquals("Totocreate", listPerson.get(8).getFirstName());
+		assertEquals(9, listPerson.size());
 	}
 
 	@Test
@@ -72,7 +72,7 @@ class PersonDaoTest {
 	@Test
 	void deletePersonTest() throws DaoException {
 		personDao.deletePerson("Toto1","Toto1 name");
-		assertEquals(5, listPerson.size());
+		assertEquals(7, listPerson.size());
 		assertEquals("Toto2", listPerson.get(0).getFirstName());
 	}
 
@@ -93,7 +93,7 @@ class PersonDaoTest {
 
 	@Test
 	void getAllPersonTest() throws DaoException {
-		assertEquals(6, listPerson.size());
+		assertEquals(8, listPerson.size());
 		assertEquals("Toto6", personDao.getAllPerson().get(5).getFirstName());
 	}
 }

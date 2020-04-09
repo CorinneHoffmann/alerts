@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.safetynet.alerts.exception.ControllerException;
 import com.safetynet.alerts.exception.DaoException;
-import com.safetynet.alerts.exception.ServiceException;
 import com.safetynet.alerts.model.EndPointChildAlert;
 import com.safetynet.alerts.model.EndPointEmail;
 import com.safetynet.alerts.model.EndPointFireAndNumberStation;

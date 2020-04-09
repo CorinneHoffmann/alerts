@@ -50,7 +50,7 @@ class MedicalRecordDaoTest {
 
 	@Test
 	void loadDataTest() {
-		assertEquals(6, medicalRecordDao.getAllMedicalRecord().size());
+		assertEquals(7, medicalRecordDao.getAllMedicalRecord().size());
 		assertEquals("Toto1", medicalRecordDao.getAllMedicalRecord().get(0).getFirstName());
 	}
 
@@ -58,7 +58,7 @@ class MedicalRecordDaoTest {
 	void createPersonTest() throws DaoCreationException, ParseException {
 
 		String stringDate = "03/05/2000";
-		DateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");		
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");		
 		Date birthDay = dateFormat.parse(stringDate);
 		List<String> medications = new ArrayList<String>();
 		medications.add("hydrapermazol:100mg");
@@ -73,8 +73,8 @@ class MedicalRecordDaoTest {
 		medicalRecord.setAllergies(allergies);	
 		medicalRecordDao.createMedicalRecord(medicalRecord);
 		
-		assertEquals("Totocreate", listMedicalRecord.get(6).getFirstName());
-		assertEquals(7, listMedicalRecord.size());
+		assertEquals("Totocreate", listMedicalRecord.get(7).getFirstName());
+		assertEquals(8, listMedicalRecord.size());
 	}
 
 	@Test
@@ -86,7 +86,7 @@ class MedicalRecordDaoTest {
 		medicalRecordDao.updateMedicalRecord(medicalRecord);
 		
 		Date birthDay = medicalRecord.getBirthdate();
-		DateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");		
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");		
 		String stringDate = dateFormat.format(birthDay);
 		
 		assertEquals(medication, listMedicalRecord.get(0).getMedications().get(0));
@@ -96,7 +96,7 @@ class MedicalRecordDaoTest {
 	@Test
 	void deleteMedicalRecordTest() throws DaoException {
 		medicalRecordDao.deleteMedicalRecord("Toto1","Toto1 name");
-		assertEquals(5, listMedicalRecord.size());
+		assertEquals(6, listMedicalRecord.size());
 		assertEquals("Toto2", listMedicalRecord.get(0).getFirstName());
 	}
 	
@@ -117,7 +117,7 @@ class MedicalRecordDaoTest {
 	
 	@Test
 	void getAllMedicalRecordTest() throws DaoException {
-		assertEquals(6, listMedicalRecord.size());
+		assertEquals(7, listMedicalRecord.size());
 		assertEquals("Toto6", medicalRecordDao.getAllMedicalRecord().get(5).getFirstName());
 	}
 

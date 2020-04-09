@@ -66,8 +66,8 @@ class MedicalRecordServiceIT {
 		medicalRecord.setAllergies(allergies);	
 		
 		medicalRecordService.createMedicalRecord(medicalRecord);
-		assertEquals("Totocreate", listMedicalRecord.get(6).getFirstName());
-		assertEquals(7, listMedicalRecord.size());
+		assertEquals("Totocreate", listMedicalRecord.get(7).getFirstName());
+		assertEquals(8, listMedicalRecord.size());
 	}
 	
 	@Test
@@ -78,7 +78,7 @@ class MedicalRecordServiceIT {
 		medicalRecord.getMedications().set(0,"hydrapermazol:100mg");
 		
 		Date birthDay = medicalRecord.getBirthdate();
-		DateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");		
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");		
 		String stringDate = dateFormat.format(birthDay);
 		
 		assertEquals(medication, listMedicalRecord.get(0).getMedications().get(0));
@@ -88,7 +88,7 @@ class MedicalRecordServiceIT {
 	@Test
 	void deletePersonServiceTest() throws DaoException {
 		medicalRecordService.deleteMedicalRecord("Toto1","Toto1 name");
-		assertEquals(5, listMedicalRecord.size());
+		assertEquals(6, listMedicalRecord.size());
 		assertEquals("Toto2", listMedicalRecord.get(0).getFirstName());
 	}
 

@@ -47,13 +47,13 @@ class FireStationControllerIT {
 	@Test
 	void shouldGetFireStationWhenEmpty() throws Exception {
 
-		MvcResult result = mockmvc.perform(get("/firestation")).andExpect(status().isOk()).andDo(print()).andReturn();
+		MvcResult result = mockmvc.perform(get("/fireStation")).andExpect(status().isOk()).andDo(print()).andReturn();
 	}
 
 	@Test
 	void shouldGetFireStation() throws Exception {
 		fireStationService.createFireStation(new FireStation("address1", 1));
-		MvcResult result = mockmvc.perform(get("/firestation")).andExpect(status().isOk()).andDo(print()).andReturn();
+		MvcResult result = mockmvc.perform(get("/fireStation")).andExpect(status().isOk()).andDo(print()).andReturn();
 	}
 
 	@Test
@@ -62,7 +62,7 @@ class FireStationControllerIT {
 		String json = "{ \"address\":\"address1\", \"station\":\"1\" }";
 
 		MvcResult result = mockmvc.perform(
-				post("/firestation").contentType(MediaType.APPLICATION_JSON).content(json).characterEncoding("utf-8"))
+				post("/fireStation").contentType(MediaType.APPLICATION_JSON).content(json).characterEncoding("utf-8"))
 				.andExpect(status().isOk()).andDo(print()).andReturn();
 	}
 
@@ -74,7 +74,7 @@ class FireStationControllerIT {
 		ObjectMapper objectMapper = new ObjectMapper();
 		String fireStationJson = objectMapper.writeValueAsString(fireStation);
 
-		this.mockmvc.perform(post("/firestation").contentType(MediaType.APPLICATION_JSON).content(fireStationJson))
+		this.mockmvc.perform(post("/fireStation").contentType(MediaType.APPLICATION_JSON).content(fireStationJson))
 				.andExpect(status().isOk()).andDo(print()).andReturn();
 	}
 
@@ -85,7 +85,7 @@ class FireStationControllerIT {
 		String json = "{ \"address\":\"address3\", \"station\":\"2\" }";
 
 		MvcResult result = mockmvc.perform(
-				put("/firestation").contentType(MediaType.APPLICATION_JSON).content(json).characterEncoding("utf-8"))
+				put("/fireStation").contentType(MediaType.APPLICATION_JSON).content(json).characterEncoding("utf-8"))
 				.andExpect(status().isOk()).andDo(print()).andReturn();
 	}
 
@@ -96,7 +96,7 @@ class FireStationControllerIT {
 		String json = "{ \"address\":\"address4\", \"station\":\"2\" }";
 
 		MvcResult result = mockmvc.perform(
-				put("/firestation").contentType(MediaType.APPLICATION_JSON).content(json).characterEncoding("utf-8"))
+				put("/fireStation").contentType(MediaType.APPLICATION_JSON).content(json).characterEncoding("utf-8"))
 				.andExpect(status().isNotFound()).andDo(print()).andReturn();
 	}
 
@@ -104,7 +104,7 @@ class FireStationControllerIT {
 	void shouldDeleteFireStationByAdress() throws Exception {
 		fireStationService.createFireStation(new FireStation("address3", 1));
 		MvcResult result = mockmvc
-				.perform(delete("/firestation/address").param("address", "address3").characterEncoding("utf-8"))
+				.perform(delete("/fireStation/address").param("address", "address3").characterEncoding("utf-8"))
 				.andExpect(status().isOk()).andDo(print()).andReturn();
 	}
 
@@ -112,14 +112,14 @@ class FireStationControllerIT {
 	void shouldNotDeleteFireStationByAdressBecauseNotFound() throws Exception {
 		fireStationService.createFireStation(new FireStation("address3", 1));
 		MvcResult result = mockmvc
-				.perform(delete("/firestation/address").param("address", "address4").characterEncoding("utf-8"))
+				.perform(delete("/fireStation/address").param("address", "address4").characterEncoding("utf-8"))
 				.andExpect(status().isNotFound()).andDo(print()).andReturn();
 	}
 
 	@Test
 	void shouldNotDeleteFireStationByAdressBecauseNotParam() throws Exception {
 		fireStationService.createFireStation(new FireStation("address3", 1));
-		MvcResult result = mockmvc.perform(delete("/firestation/address").characterEncoding("utf-8"))
+		MvcResult result = mockmvc.perform(delete("/fireStation/address").characterEncoding("utf-8"))
 				.andExpect(status().isInternalServerError()).andDo(print()).andReturn();
 	}
 
@@ -128,7 +128,7 @@ class FireStationControllerIT {
 
 		fireStationService.createFireStation(new FireStation("address3", 1));
 		MvcResult result = mockmvc
-				.perform(delete("/firestation/add").param("address", "address4").characterEncoding("utf-8"))
+				.perform(delete("/fireStation/add").param("address", "address4").characterEncoding("utf-8"))
 				.andExpect(status().isNotFound()).andDo(print()).andReturn();
 	}
 
@@ -137,7 +137,7 @@ class FireStationControllerIT {
 
 		fireStationService.createFireStation(new FireStation("address3", 1));
 		MvcResult result = mockmvc
-				.perform(delete("/firestation/").param("address", "address4").characterEncoding("utf-8"))
+				.perform(delete("/fireStation/").param("address", "address4").characterEncoding("utf-8"))
 				.andExpect(status().isMethodNotAllowed()).andDo(print()).andReturn();
 	}
 
@@ -148,7 +148,7 @@ class FireStationControllerIT {
 		fireStationService.createFireStation(new FireStation("address3", 1));
 
 		MvcResult result = mockmvc
-				.perform(delete("/firestation/station").param("station", "1").characterEncoding("utf-8"))
+				.perform(delete("/fireStation/station").param("station", "1").characterEncoding("utf-8"))
 				.andExpect(status().isOk()).andDo(print()).andReturn();
 	}
 
@@ -159,7 +159,7 @@ class FireStationControllerIT {
 		fireStationService.createFireStation(new FireStation("address3", 1));
 
 		MvcResult result = mockmvc
-				.perform(delete("/firestation/station").param("station", "3").characterEncoding("utf-8"))
+				.perform(delete("/fireStation/station").param("station", "3").characterEncoding("utf-8"))
 				.andExpect(status().isNotFound()).andDo(print()).andReturn();
 	}
 
@@ -169,7 +169,7 @@ class FireStationControllerIT {
 		fireStationService.createFireStation(new FireStation("address2", 2));
 		fireStationService.createFireStation(new FireStation("address3", 1));
 
-		MvcResult result = mockmvc.perform(delete("/firestation/station").characterEncoding("utf-8"))
+		MvcResult result = mockmvc.perform(delete("/fireStation/station").characterEncoding("utf-8"))
 				.andExpect(status().isBadRequest()).andDo(print()).andReturn();
 	}
 }

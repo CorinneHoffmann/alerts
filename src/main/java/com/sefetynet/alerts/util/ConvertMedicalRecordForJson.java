@@ -33,7 +33,7 @@ public class ConvertMedicalRecordForJson {
 
 	public String convertDate(Date date) throws java.text.ParseException {
 
-		DateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		String stringDate = dateFormat.format(date);
 		return stringDate;
 	}

@@ -17,7 +17,6 @@ public class MedicalRecord {
 	private String lastName;
 	
 	@JsonDeserialize(using = DateHandler.class)
-	//@JsonFormat(pattern="dd/MM/yyyy")
 	private Date birthdate;
 	private List<String> medications;	
 	private List<String> allergies;	

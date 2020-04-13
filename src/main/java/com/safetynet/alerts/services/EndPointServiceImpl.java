@@ -73,6 +73,12 @@ public class EndPointServiceImpl implements EndPointService {
 	private String firstName;
 	private String lastName;
 
+	/*
+	 * @param city
+	 * 		String city for select in list of person
+	 * @return EndPointEmail
+	 * 		object EndPointEmail - email list of the selected persons
+	 */
 	@Override
 	public EndPointEmail getEmailsByCity(String city) {
 		this.city = city;
@@ -96,7 +102,13 @@ public class EndPointServiceImpl implements EndPointService {
 		return endPointEmail;
 
 	}
-
+	
+	/*
+	 * @param address
+	 * 		String address for select in list of person
+	 * @return EndPointChildAlert
+	 * 		object EndPointChildAlert - child list who live in this address and other persons who live in this address
+	 */
 	@Override
 	public EndPointChildAlert getChildAlert(String address) throws DaoException {
 		this.address = address;
@@ -147,6 +159,12 @@ public class EndPointServiceImpl implements EndPointService {
 		return endPointChildAlert;
 	}
 
+	/*
+	 * @param stationNumber
+	 * 		String stationNumber for select in list of firestation
+	 * @return EndPointFireStationAndCount
+	 * 		object EndPointFireStationAndCount - persons list who live in addresses covered by the firestation number and number of child and number of adults
+	 */
 	@Override
 	public EndPointFireStationAndCount getPersonsByFireStation(int stationNumber) throws DaoException {
 		this.stationNumber = stationNumber;
@@ -212,6 +230,12 @@ public class EndPointServiceImpl implements EndPointService {
 		return endPointFireStationAndCount;
 	}
 
+	/*
+	 * @param firestation
+	 * 		firestation number for select in list of firestation
+	 * @return EndPointPhoneAlert
+	 * 		object EndPointPhoneAlert - phone list of persons who live in addresses covered by firestation
+	 */
 	@Override
 	public EndPointPhoneAlert getPhoneByStation(int stationNumber) {
 
@@ -246,6 +270,12 @@ public class EndPointServiceImpl implements EndPointService {
 
 	}
 
+	/*
+	 * @param address
+	 * 		String address for select in list of firestation
+	 * @return EndPointFireAndNumberStation
+	 * 		object EndPointFireAndNumberStation - persons list who live in addresses covered by firestation and firestation number
+	 */
 	@Override
 	public EndPointFireAndNumberStation getFireByAddress(String address) throws DaoException {
 		this.address = address;
@@ -297,6 +327,12 @@ public class EndPointServiceImpl implements EndPointService {
 		return endPointFireAndNumberStation;
 	}
 
+	/*
+	 * @param stations
+	 * 		list of stations numbers for select in list of firestation
+	 * @return EndPointFlood
+	 * 		object EndPointFlood - persons list who live in addresses covered by firestation
+	 */
 	@Override
 	public EndPointFlood getFlood(List<Integer> stations) {
 		this.stations = stations;
@@ -371,6 +407,12 @@ public class EndPointServiceImpl implements EndPointService {
 		return endPointFlood;
 	}
 
+	/*
+	 * @param firstName and lastName
+	 * 		lastName is required
+	 * @return EndPointPersonInfo
+	 * 		object EndPointPersonInfo - persons list with firstName and lastName
+	 */
 	@Override
 	public EndPointPersonInfo getPersonInfo(String firstName, String lastName) {
 		this.firstName = firstName;

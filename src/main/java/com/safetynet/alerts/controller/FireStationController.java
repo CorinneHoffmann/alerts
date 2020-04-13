@@ -21,6 +21,9 @@ import com.safetynet.alerts.exception.DaoException;
 import com.safetynet.alerts.model.FireStation;
 import com.safetynet.alerts.services.FireStationService;
 
+/*
+ * Controller for firestation
+ */
 @RestController("fireStationController")
 @RequestMapping("/fireStation")
 public class FireStationController {
@@ -41,18 +44,37 @@ public class FireStationController {
 		return fireStationDao.getAllFireStation();
 	}
 
+	/*
+	 * @param FireStation
+	 * 		object FireStation for creating
+	 * @return FireStation
+	 * 		object FireStation created
+	 */
 	@PostMapping
 	public FireStation createFireStation(@RequestBody FireStation fireStation) throws DaoCreationException {
 		logger.info("CREATE_FIRESTATION " + fireStation.getAddress() + " " + fireStation.getStation());
 		return fireStationService.createFireStation(fireStation);
 	}
 
+
+	/*
+	 * @param FireStation
+	 * 		object FireStation for update
+	 * @return FireStation
+	 * 		object FireStation updated
+	 */
 	@PutMapping
 	public FireStation updateFireStation(@RequestBody FireStation fireStation) throws DaoException {
 		logger.info("UPDATE_FIRESTATION " + fireStation.getAddress() + " " + fireStation.getStation());
 		return fireStationService.updateFireStation(fireStation);
 	}
 
+	/*
+	 * @param address
+	 * 		address of the FireStation for delete
+	 * @return FireStation
+	 * 		object FireStation deleted
+	 */
 	@DeleteMapping(value = "/address")
 	public FireStation deleteFireStationByAddress(@RequestParam(value = "address", required = false) String address) throws DaoException, ControllerException {
 		if (address.isEmpty()) {
@@ -63,6 +85,13 @@ public class FireStationController {
 		
 	}
 
+
+	/*
+	 * @param station
+	 * 		station of the FireStation for delete
+	 * @return list of FireStation
+	 * 		object list FireStation deleted
+	 */
 	@DeleteMapping(value = "/station")
 	public List<FireStation> deleteFireStationByStation(@RequestParam(value = "station", required = false) Integer station) throws DaoException, ControllerException {
 		if (station == null) {

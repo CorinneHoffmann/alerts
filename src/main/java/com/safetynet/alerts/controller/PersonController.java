@@ -23,6 +23,9 @@ import com.safetynet.alerts.exception.DaoException;
 import com.safetynet.alerts.model.Person;
 import com.safetynet.alerts.services.PersonService;
 
+/*
+ * Controller for Persons
+ */
 @RestController("personController")
 @RequestMapping("/person")
 public class PersonController {
@@ -45,6 +48,12 @@ public class PersonController {
 	}
 
 	// @PostMapping(value = "/person", consumes = MediaType.APPLICATION_JSON_VALUE)
+	/*
+	 * @param Person
+	 * 		object person for create
+	 * @return Person
+	 * 		object Person created
+	 */
 	@PostMapping
 	public Person createPerson(@RequestBody Person person) throws DaoCreationException {
 		logger.info("QUERY_CREATE_PERSON " + person.getFirstName() + " " + person.getLastName());
@@ -53,6 +62,12 @@ public class PersonController {
 	}
 
 	// @PutMapping(value = "/person", consumes = MediaType.APPLICATION_JSON_VALUE)
+	/*
+	 * @param Person
+	 * 		object person for update
+	 * @return Person
+	 * 		object Person updated
+	 */
 	@PutMapping
 	public Person updatePerson(@RequestBody Person person) throws DaoException {
 		logger.info("QUERY_UPDATE_PERSON " + person.getFirstName() + " " + person.getLastName());
@@ -60,6 +75,12 @@ public class PersonController {
 		return person;
 	}
 
+	/*
+	 * @param firstName lastName
+	 * 		firstName and lastName of the person for get
+	 * @return Person
+	 * 		object Person 
+	 */
 	@DeleteMapping
 	public Person deletePerson(@RequestParam(value = "firstName", required = false) String firstName,
 			@RequestParam(value = "lastName", required = false) String lastName)

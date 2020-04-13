@@ -28,16 +28,29 @@ public class FireStationDaoImpl implements FireStationDao {
 
 	private int station;
 
+	/*
+	 * Get All FireStation - permit to get all the list of loaded FireStation
+	 *@return list of FireStation 
+	 */
 	@Override
 	public List<FireStation> getAllFireStation() {
 		return listFireStation;
 	}
 
+	/*
+	 * Set All FireStation - permit to load in memory all FireStation from JSON file
+	 */
 	@Override
 	public void SetAllFireStation(List<FireStation> listFireStation) {
 		this.listFireStation = listFireStation;
 	}
 
+	/*
+	 * @param FireStation
+	 * 		object FireStation for creating
+	 * @return FireStation
+	 * 		object FireStation created
+	 */
 	@Override
 	public FireStation createFireStation(FireStation fireStation) throws DaoCreationException {
 		this.fireStation = fireStation;
@@ -60,6 +73,12 @@ public class FireStationDaoImpl implements FireStationDao {
 		return fireStation;
 	}
 
+	/*
+	 * @param FireStation
+	 * 		object FireStation for update
+	 * @return FireStation
+	 * 		object FireStation updated
+	 */
 	@Override
 	public FireStation updateFireStation(FireStation fireStation) throws DaoException {
 		this.fireStation = fireStation;
@@ -80,6 +99,13 @@ public class FireStationDaoImpl implements FireStationDao {
 		return fireStation;
 	}
 
+
+	/*
+	 * @param address
+	 * 		address of the FireStation for delete
+	 * @return FireStation
+	 * 		object FireStation deleted
+	 */
 	@Override
 	public FireStation deleteFireStationByAddress(String address) throws DaoException {
 		this.address = address;
@@ -101,6 +127,12 @@ public class FireStationDaoImpl implements FireStationDao {
 		return fireStation;
 	}
 
+	/*
+	 * @param station
+	 * 		station of the FireStation for delete
+	 * @return list of FireStation
+	 * 		object list FireStation deleted
+	 */
 	@Override
 	public List<FireStation> deleteFireStationByStation(int station) throws DaoException {
 		this.station = station;
@@ -129,6 +161,12 @@ public class FireStationDaoImpl implements FireStationDao {
 		return result;
 	}
 
+	/*
+	 * @param address
+	 * 	 * 		address of the FireStation for get
+	 * @return FireStation
+	 * 		object FireStation 
+	 */
 	@Override
 	public FireStation getFireStation(String address) throws DaoException {
 		this.address = address;
@@ -149,6 +187,9 @@ public class FireStationDaoImpl implements FireStationDao {
 		return fireStation;
 	}
 
+	/*
+	 * Delete All fireStation loaded in memory
+	 */
 	@Override
 	public void deleteAllFireStation() {
 		listFireStation.clear();

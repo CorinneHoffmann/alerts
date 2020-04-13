@@ -12,6 +12,10 @@ import com.safetynet.alerts.exception.DaoCreationException;
 import com.safetynet.alerts.exception.DaoException;
 import com.safetynet.alerts.model.Person;
 
+/*
+ * 
+ */
+
 @Repository("personDAO")
 public class PersonDaoImpl implements PersonDao {
 
@@ -27,16 +31,31 @@ public class PersonDaoImpl implements PersonDao {
 
 	private String addres;
 
+	
+
+	/*
+	 * Get All Persons - permit to get all the list of loaded persons
+	 *@return list of Person 
+	 */
 	@Override
 	public List<Person> getAllPerson() {
 		return listPerson;
 	}
 
+	/*
+	 * Set All Persons - permit to load in memory all person from JSON file
+	 */
 	@Override
 	public void SetAllPerson(List<Person> listPerson) {
 		this.listPerson = listPerson;
 	}
 
+	/*
+	 * @param Person
+	 * 		object person for creating
+	 * @return Person
+	 * 		object Person created
+	 */
 	@Override
 	public Person createPerson(Person person) throws DaoCreationException {
 		this.person = person;
@@ -58,6 +77,12 @@ public class PersonDaoImpl implements PersonDao {
 		return person;
 	}
 
+	/*
+	 * @param Person
+	 * 		object person for update
+	 * @return Person
+	 * 		object Person updated
+	 */
 	@Override
 	public Person updatePerson(Person person) throws DaoException {
 		this.person = person;
@@ -79,12 +104,21 @@ public class PersonDaoImpl implements PersonDao {
 		logger.info("RESPONSE_PERSON_UPDATED " + person.getFirstName() + " " + person.getLastName());
 		return person;
 	}
-
+	
+	/*
+	 * Delete All Persons loaded in memory
+	 */
 	@Override
 	public void deleteAllPerson() {
 		listPerson.clear();
 	}
 
+	/*
+	 * @param firstName lastName
+	 * 		firstName and lastName of the person for get
+	 * @return Person
+	 * 		object Person 
+	 */
 	@Override
 	public Person getPerson(String firstName, String lastName) throws DaoException {
 		this.firstName = firstName;
@@ -109,7 +143,13 @@ public class PersonDaoImpl implements PersonDao {
 		return person;
 
 	}
-
+	
+	/*
+	 * @param firstName lastName
+	 * 		firstName and lastName of the person for delete
+	 * @return Person
+	 * 		object Person deleted
+	 */
 	@Override
 	public Person deletePerson(String firstName, String lastName) throws DaoException {
 		this.firstName = firstName;
@@ -134,12 +174,17 @@ public class PersonDaoImpl implements PersonDao {
 		logger.info("RESPONSE_PERSON_DELETED " + firstName + " " + lastName);
 		return person;
 	}
+	
 
+	/*
+	 * @param address and firstName
+	 * 		address and lastName of the person getting family
+	 * @return list of Person who live at the same address with a different firstName
+	 */
 	@Override
 	public List<Person> GetFamilly(String address, String firstName) {
 		this.addres = address;
 		this.firstName = firstName;
-		//String firstNameMembers;
 		int index;
 		boolean findOK = false;
 		List<Person> listMembers = new ArrayList<Person>();
@@ -148,7 +193,6 @@ public class PersonDaoImpl implements PersonDao {
 				(listPerson.get(index).getFirstName().contentEquals(firstName) == false))	
 			{
 				person = listPerson.get(index);
-				//firstNameMembers = listPerson.get(index).getFirstName();
 				listMembers.add(person);
 				findOK = true;
 			}

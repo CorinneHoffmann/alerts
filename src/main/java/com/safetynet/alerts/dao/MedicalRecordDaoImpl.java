@@ -24,16 +24,30 @@ public class MedicalRecordDaoImpl implements MedicalRecordDao {
 	private String firstName;
 	private String lastName;
 
+	/*
+	 * Get All MedicalRecord - permit to get all the list of loaded MedicalRecord
+	 *@return list of MedicalRecord 
+	 */
 	@Override
 	public List<MedicalRecord> getAllMedicalRecord() {
 		return listMedicalRecord;
 	}
 
+	/*
+	 * Set All MedicalRecord - permit to load in memory all MedicalRecord from JSON file
+	 */
 	@Override
 	public void setAllMedicalRecord(List<MedicalRecord> listMedicalRecord) {
 		this.listMedicalRecord = listMedicalRecord;
 	}
 
+
+	/*
+	 * @param MedicalRecord
+	 * 		object MedicalRecord for creating
+	 * @return MedicalRecord
+	 * 		object MedicalRecord created
+	 */
 	@Override
 	public MedicalRecord createMedicalRecord(MedicalRecord medicalRecord) throws DaoCreationException {
 		this.medicalRecord = medicalRecord;
@@ -55,6 +69,13 @@ public class MedicalRecordDaoImpl implements MedicalRecordDao {
 		return medicalRecord;
 	}
 
+
+	/*
+	 * @param MedicalRecord
+	 * 		object MedicalRecord for update
+	 * @return MedicalRecord
+	 * 		object MedicalRecord updated
+	 */
 	@Override
 	public MedicalRecord updateMedicalRecord(MedicalRecord medicalRecord) throws DaoException {
 		this.medicalRecord = medicalRecord;
@@ -79,6 +100,13 @@ public class MedicalRecordDaoImpl implements MedicalRecordDao {
 		return medicalRecord;
 	}
 
+	
+	/*
+	 * @param firstName lastName
+	 * 		firstName and lastName of the MedicalRecord for delete
+	 * @return MedicalRecord
+	 * 		object MedicalRecord deleted
+	 */
 	@Override
 	public MedicalRecord deleteMedicalRecord(String firstName, String lastName) throws DaoException {
 		this.firstName = firstName;
@@ -106,7 +134,12 @@ public class MedicalRecordDaoImpl implements MedicalRecordDao {
 		
 	}
 
-
+	/*
+	 * @param firstName lastName
+	 * 		firstName and lastName of the MedicalRecord for get
+	 * @return MedicalRecord
+	 * 		object MedicalRecord 
+	 */
 	@Override
 	public MedicalRecord getMedicalRecord(String firstName, String lastName) throws DaoException {
 		this.firstName = firstName;
@@ -131,6 +164,10 @@ public class MedicalRecordDaoImpl implements MedicalRecordDao {
 		return medicalRecord;
 	}
 
+
+	/*
+	 * Delete All lMedicalRecord loaded in memory
+	 */
 	@Override
 	public void deleteAllMedicalRecord() {
 		listMedicalRecord.clear();

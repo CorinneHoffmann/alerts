@@ -21,6 +21,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.safetynet.alerts.dao.FireStationDao;
 import com.safetynet.alerts.model.FireStation;
 
+/*
+ * for loading FireStation list in memory
+ * JSON file in entry
+ */
 @Service("loadFireStationService")
 public class LoadFireStationServiceImpl implements LoadFireStationService {
 
@@ -35,6 +39,10 @@ public class LoadFireStationServiceImpl implements LoadFireStationService {
 	@Value("${filename}")
 	private String filename;
 
+	/*
+	 * for loading FireStation list in memory
+	 * JSON file in entry
+	 */
 	@PostConstruct	
 	@Override
 	public void loadData() throws JsonMappingException, IOException, ClassNotFoundException {

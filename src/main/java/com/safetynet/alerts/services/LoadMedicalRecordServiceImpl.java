@@ -24,6 +24,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.safetynet.alerts.dao.MedicalRecordDao;
 import com.safetynet.alerts.model.MedicalRecord;
 
+/*
+ * for loading MedicalRecord list in memory
+ * JSON file in entry
+ */
 @Service
 public class LoadMedicalRecordServiceImpl implements LoadMedicalRecordService {
 
@@ -38,6 +42,10 @@ public class LoadMedicalRecordServiceImpl implements LoadMedicalRecordService {
 	@Value("${filename}")
 	private String filename;
 	
+	/*
+	 * for loading MedicalRecord list in memory
+	 * JSON file in entry
+	 */
 	@Override
 	@PostConstruct
 	public void loadData() throws JsonMappingException, IOException, ClassNotFoundException {

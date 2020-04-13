@@ -21,6 +21,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.safetynet.alerts.dao.PersonDao;
 import com.safetynet.alerts.model.Person;
 
+/*
+ * for loading person list in memory
+ * JSON file in entry
+ */
 @Service("loadPersonService")
 public class LoadPersonServiceImpl implements LoadPersonService {
 
@@ -34,6 +38,10 @@ public class LoadPersonServiceImpl implements LoadPersonService {
 	@Value("${filename}")
 	private String filename;
 
+	/*
+	 * for loading person list in memory
+	 * JSON file in entry
+	 */
 	@PostConstruct
 	@Override
 	public void loadData() throws JsonMappingException, IOException, ClassNotFoundException {

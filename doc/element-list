@@ -1,0 +1,7 @@
+com.safetynet.alerts
+com.safetynet.alerts.controller
+com.safetynet.alerts.dao
+com.safetynet.alerts.exception
+com.safetynet.alerts.model
+com.safetynet.alerts.services
+com.sefetynet.alerts.util

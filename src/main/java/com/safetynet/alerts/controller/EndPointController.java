@@ -21,6 +21,9 @@ import com.safetynet.alerts.model.EndPointPersonInfo;
 import com.safetynet.alerts.model.EndPointPhoneAlert;
 import com.safetynet.alerts.services.EndPointService;
 
+/*
+ * Controller for EndPopints
+ */
 @RestController("endPointController")
 @RequestMapping
 public class EndPointController {
@@ -31,6 +34,13 @@ public class EndPointController {
 	@Autowired
 	EndPointService endPointService;
 
+	/*
+	 * @param city
+	 * 		String city for select in list of person
+	 * @return EndPointEmail
+	 * 		object EndPointEmail - email list of the selected persons
+	 */
+	
 	@GetMapping(value = "/communityEmail")
 	EndPointEmail getEmailByCity(@RequestParam(value = "city", required = false) String city)
 			throws ControllerException {
@@ -41,6 +51,12 @@ public class EndPointController {
 		return endPointService.getEmailsByCity(city);
 	}
 	
+	/*
+	 * @param address
+	 * 		String address for select in list of person
+	 * @return EndPointChildAlert
+	 * 		object EndPointChildAlert - child list who live in this address and other persons who live in this address
+	 */
 	@GetMapping(value = "/childAlert")
 	EndPointChildAlert getChildAlert(@RequestParam(value = "address", required = false) String address)
 			throws ControllerException, DaoException {
@@ -51,8 +67,14 @@ public class EndPointController {
 		return endPointService.getChildAlert(address);
 	}
 	
-	
-	@GetMapping(value = "/firestation")
+
+	/*
+	 * @param stationNumber
+	 * 		String stationNumber for select in list of firestation
+	 * @return EndPointFireStationAndCount
+	 * 		object EndPointFireStationAndCount - persons list who live in addresses covered by the firestation number and number of child and number of adults
+	 */
+		@GetMapping(value = "/firestation")
 	EndPointFireStationAndCount getPersonsByFireStation(@RequestParam(value = "stationNumber", required = false) Integer stationNumber)
 			throws ControllerException, DaoException {
 		if (stationNumber == null) {
@@ -62,6 +84,12 @@ public class EndPointController {
 		return endPointService.getPersonsByFireStation(stationNumber);
 	}
 
+	/*
+	 * @param firestation
+	 * 		firestation number for select in list of firestation
+	 * @return EndPointPhoneAlert
+	 * 		object EndPointPhoneAlert - phone list of persons who live in addresses covered by firestation
+	 */
 	@GetMapping(value = "/phoneAlert")
 	EndPointPhoneAlert getPhoneByStation(@RequestParam(value = "firestation", required = false) Integer firestation)
 			throws ControllerException {
@@ -72,6 +100,12 @@ public class EndPointController {
 		return endPointService.getPhoneByStation(firestation);
 	}
 	
+	/*
+	 * @param address
+	 * 		String address for select in list of firestation
+	 * @return EndPointFireAndNumberStation
+	 * 		object EndPointFireAndNumberStation - persons list who live in addresses covered by firestation and firestation number
+	 */
 	@GetMapping(value = "/fire")
 	EndPointFireAndNumberStation getFireByAddress(@RequestParam(value = "address", required = false) String address)
 			throws ControllerException, DaoException {
@@ -82,6 +116,13 @@ public class EndPointController {
 		return endPointService.getFireByAddress(address);
 	}
 	
+
+	/*
+	 * @param stations
+	 * 		list of stations numbers for select in list of firestation
+	 * @return EndPointFlood
+	 * 		object EndPointFlood - persons list who live in addresses covered by firestation
+	 */
 	@GetMapping(value = "/flood")
 	EndPointFlood getFlood(@RequestParam(value = "stations", required = false) List<Integer> stations)
 			throws ControllerException, DaoException {
@@ -92,6 +133,12 @@ public class EndPointController {
 		return endPointService.getFlood(stations);
 	}
 	
+	/*
+	 * @param firstName and lastName
+	 * 		lastName is required
+	 * @return EndPointPersonInfo
+	 * 		object EndPointPersonInfo - persons list with firstName and lastName
+	 */
 	@GetMapping(value = "/personInfo")
 	EndPointPersonInfo getPersonInfo(@RequestParam(value = "firstName", required = false) String firstName,
 									 @RequestParam(value = "lastName", required = false) String lastName)

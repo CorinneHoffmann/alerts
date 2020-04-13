@@ -24,6 +24,9 @@ import com.safetynet.alerts.model.MedicalRecordForReturnFormat;
 import com.safetynet.alerts.services.MedicalRecordService;
 import com.sefetynet.alerts.util.ConvertMedicalRecordForJson;
 
+/*
+ * Controller for MedicalRecord
+ */
 @RestController("medicalRecordController")
 @RequestMapping("/medicalrecord")
 public class MedicalRecordController {
@@ -49,6 +52,12 @@ public class MedicalRecordController {
 	}
 
 	// @PostMapping(value = "/medicalrecord", consumes = MediaType.APPLICATION_JSON_VALUE)
+	/*
+	 * @param MedicalRecord
+	 * 		object MedicalRecord for creating
+	 * @return MedicalRecord
+	 * 		object MedicalRecord created
+	 */
 	@PostMapping
 	public MedicalRecordForReturnFormat createMedicalRecord(@RequestBody MedicalRecord medicalRecord) throws ParseException, DaoCreationException {
 		logger.info("QUERY_CREATE_MEDICALRECORD " + medicalRecord.getFirstName() + " " + medicalRecord.getLastName());
@@ -60,6 +69,12 @@ public class MedicalRecordController {
 	}
 
 	// @PutMapping(value = "/medicalrecord", consumes = MediaType.APPLICATION_JSON_VALUE)
+	/*
+	 * @param MedicalRecord
+	 * 		object MedicalRecord for update
+	 * @return MedicalRecord
+	 * 		object MedicalRecord updated
+	 */
 	@PutMapping
 	public MedicalRecordForReturnFormat updateMedicalRecord(@RequestBody MedicalRecord medicalRecord) throws DaoException, ParseException {
 		logger.info("QUERY_UPDATE_MEDICALRECORD " + medicalRecord.getFirstName() + " " + medicalRecord.getLastName());
@@ -69,6 +84,12 @@ public class MedicalRecordController {
 		return convertMedicalRecordForJson.convertDateForPublication();
 	}
 
+	/*
+	 * @param firstName lastName
+	 * 		firstName and lastName of the MedicalRecord for delete
+	 * @return MedicalRecord
+	 * 		object MedicalRecord deleted
+	 */
 	@DeleteMapping
 	public MedicalRecordForReturnFormat deleteMedicalRecord(@RequestParam(value = "firstName", required = false) String firstName,
 			@RequestParam(value = "lastName", required = false) String lastName)

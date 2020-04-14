@@ -76,7 +76,7 @@ public class MedicalRecordController {
 	 * 		object MedicalRecord updated
 	 */
 	@PutMapping
-	public MedicalRecordForReturnFormat updateMedicalRecord(@RequestBody MedicalRecord medicalRecord) throws DaoException, ParseException {
+	public MedicalRecordForReturnFormat updateMedicalRecord(@RequestBody MedicalRecord medicalRecord) throws DaoException, ParseException {	
 		logger.info("QUERY_UPDATE_MEDICALRECORD " + medicalRecord.getFirstName() + " " + medicalRecord.getLastName());
 		medicalRecord = medicalRecordService.updateMedicalRecord(medicalRecord);
 		//converion de la date pour affichage		

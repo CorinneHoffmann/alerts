@@ -32,6 +32,7 @@ import com.safetynet.alerts.model.MedicalRecord;
 import com.safetynet.alerts.model.MedicalRecordForReturnFormat;
 import com.safetynet.alerts.model.Person;
 import com.safetynet.alerts.services.MedicalRecordService;
+import com.sefetynet.alerts.util.ConvertMedicalRecordForJson;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -63,7 +64,7 @@ class MedicalRecordControllerTest {
 	@Test
 	void whenCreateMedicalRecord() throws DaoCreationException, ParseException {
 		String stringDate = "03/05/2000";
-		DateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		Date birthDay = dateFormat.parse(stringDate);
 		List<String> medications = new ArrayList<String>();
 		medications.add("hydrapermazol:100mg");
@@ -88,14 +89,13 @@ class MedicalRecordControllerTest {
 
 		assertEquals("Totocreate", result.getFirstName());
 		assertEquals("Totocreate name", result.getLastName());
-		assertEquals(stringDate, result.getBirthdate());
 	}
 
 	@Test
 	void whenUpdatePerson() throws DaoException, ParseException{
 		
 		String stringDate = "03/05/2000";
-		DateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");		
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");		
 		Date birthDay = dateFormat.parse(stringDate);
 		List<String> medications = new ArrayList<String>();
 		medications.add("hydrapermazol:100mg");
@@ -109,29 +109,29 @@ class MedicalRecordControllerTest {
 		medicalRecord1.setMedications(medications);
 		medicalRecord1.setAllergies(allergies);	
 		
-		String stringDateUpdated = "03/09/2000";		
-		Date birthDayUpdated = dateFormat.parse(stringDateUpdated);
 		
 		medicalRecordUpdated.setFirstName("Toto1");
 		medicalRecordUpdated.setLastName("Toto1 name");
-		medicalRecordUpdated.setBirthdate(birthDayUpdated);
+		medicalRecordUpdated.setBirthdate(birthDay);
 		medicalRecordUpdated.setMedications(medications);
+		allergies.add("shellfish");
 		medicalRecordUpdated.setAllergies(allergies);	
 
 		when(medicalRecordService.updateMedicalRecord(medicalRecord1)).thenReturn(medicalRecordUpdated);
 		
-		MedicalRecordForReturnFormat result = medicalRecordController.updateMedicalRecord(medicalRecord1);
+		MedicalRecordForReturnFormat result = medicalRecordController.updateMedicalRecord(medicalRecord1);		
 		
 		assertEquals("Toto1", result.getFirstName());
 		assertEquals("Toto1 name", result.getLastName());
-		assertEquals(stringDateUpdated, result.getBirthdate());
+		assertEquals("shellfish", result.getAllergies().get(2));
+		
 	}
 	
 	@Test
 	void whenDeleteMedicalRecord() throws DaoException, ControllerException, ParseException{
 
 		String stringDate = "03/05/2000";
-		DateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		Date birthDay = dateFormat.parse(stringDate);
 		List<String> medications = new ArrayList<String>();
 		medications.add("hydrapermazol:100mg");
@@ -150,8 +150,6 @@ class MedicalRecordControllerTest {
 		MedicalRecordForReturnFormat result = medicalRecordController.deleteMedicalRecord("Toto2", "Toto2 name");
 		
 		assertEquals("Toto2", result.getFirstName());
-		assertEquals("Toto2 name", result.getLastName());
-		assertEquals(stringDate, result.getBirthdate());
-		
+		assertEquals("Toto2 name", result.getLastName());	
 	}
 }

@@ -1,0 +1,21 @@
+2020-04-14 16:10:32,438 INFO o.s.b.StartupInfoLogger [main] Starting AlertsApplication on PO702946VW7JAV with PID 8008 (C:\Users\S061930\git\alerts\target\classes started by S061930 in C:\Users\S061930\git\alerts)
+2020-04-14 16:10:32,454 INFO o.s.b.SpringApplication [main] No active profile set, falling back to default profiles: default
+2020-04-14 16:10:35,967 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat initialized with port(s): 5006 (http)
+2020-04-14 16:10:35,999 INFO o.a.j.l.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-5006"]
+2020-04-14 16:10:36,001 INFO o.a.j.l.DirectJDKLog [main] Starting service [Tomcat]
+2020-04-14 16:10:36,003 INFO o.a.j.l.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.31]
+2020-04-14 16:10:36,291 INFO o.a.j.l.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2020-04-14 16:10:36,292 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 3673 ms
+2020-04-14 16:10:36,853 INFO c.s.a.s.LoadFireStationServiceImpl [main] END OF LOAD FIRESTATION
+2020-04-14 16:10:37,026 INFO c.s.a.s.LoadMedicalRecordServiceImpl [main] END OF LOAD MEDICALRECORD
+2020-04-14 16:10:37,123 INFO c.s.a.s.LoadPersonServiceImpl [main] END OF LOAD PERSON
+2020-04-14 16:10:37,409 INFO o.s.s.c.ExecutorConfigurationSupport [main] Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-14 16:10:37,828 INFO o.s.b.a.e.w.EndpointLinksResolver [main] Exposing 13 endpoint(s) beneath base path '/actuator'
+2020-04-14 16:10:37,910 INFO o.a.j.l.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-5006"]
+2020-04-14 16:10:38,025 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat started on port(s): 5006 (http) with context path ''
+2020-04-14 16:10:38,029 INFO o.s.b.StartupInfoLogger [main] Started AlertsApplication in 6.172 seconds (JVM running for 8.671)
+2020-04-14 16:11:12,645 INFO o.a.j.l.DirectJDKLog [http-nio-5006-exec-2] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-04-14 16:11:12,645 INFO o.s.w.s.FrameworkServlet [http-nio-5006-exec-2] Initializing Servlet 'dispatcherServlet'
+2020-04-14 16:11:12,656 INFO o.s.w.s.FrameworkServlet [http-nio-5006-exec-2] Completed initialization in 11 ms
+2020-04-14 16:11:19,512 INFO c.s.a.c.PersonController [http-nio-5006-exec-4] QUERY_CREATE_PERSON David Boyd
+2020-04-14 16:11:19,517 INFO c.s.a.d.PersonDaoImpl [http-nio-5006-exec-4] RESPONSE_PERSON_CREATED David Boyd
